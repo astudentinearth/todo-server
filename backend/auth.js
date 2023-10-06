@@ -6,26 +6,26 @@ import jwt from "jsonwebtoken"
  * @param {express.Express} app 
  */
 export function authAPI(app){
-    app.post("/login",(req,res)=>{
-        if(req.body.password==null) {res.status(400).send("No password provided"); return}
-        if(req.body.username==null) {res.status(400).send("No username provided"); return}
+    app.post("/api/v1/login",(req,res)=>{
+        if(req.body.password==null) {res.status(400).send("NO_PASSWORD"); return}
+        if(req.body.username==null) {res.status(400).send("NO_USERNAME"); return}
         db("users").select("username","password","id").where({username: req.body.username}).then((val)=>{
             if(val.length==0 || val==null){
-                return res.status(400).send("User doesn't exist.");
+                return res.status(400).send("USER_DOESNT_EXIST");
             }
             bcrypt.compare(req.body.password, val[0].password).then((match)=>{
                 if(!match){
-                    return res.status(400).send("Wrong password");
+                    return res.status(400).send("INVALID_PASSWORD");
                 }
                 else{
                     req.session.user = val[0]
-                    res.status(200).send("Login success")
+                    res.status(200).send("LOGIN_SUCCESS")
                 }
             })
         })
     })
 
-    app.post("/register",(req,res)=>{
+    app.post("/api/v1/register",(req,res)=>{
         if(req.body.password==null) {res.status(400).send("No password provided"); return}
         if(req.body.username==null) {res.status(400).send("No username provided"); return}
         bcrypt.hash(req.body.password, 10).then((hash)=>{
@@ -37,9 +37,18 @@ export function authAPI(app){
         });
     })
 
-    app.get("/logout",(req,res)=>{
+    app.get("/api/v1/logout",(req,res)=>{
         req.session.destroy();
         res.redirect("/");
+    })
+
+    app.get("/api/v1/validate-session",(req,res)=>{
+        if(req.session.user){
+            res.status(200).send("SESSION_VALID");
+        }
+        else{
+            res.status(401).send("SESSION_INVALID");
+        }
     })
 }
 
