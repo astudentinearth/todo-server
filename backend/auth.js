@@ -39,14 +39,18 @@ export function authAPI(app){
 
     app.get("/api/v1/logout",(req,res)=>{
         req.session.destroy();
-        res.redirect("/");
     })
 
     app.get("/api/v1/validate-session",(req,res)=>{
-        if(req.session.user){
-            res.status(200).send("SESSION_VALID");
+        try{
+            if(req.session.user){
+                res.status(200).send("SESSION_VALID");
+            }
+            else{
+                res.status(401).send("SESSION_INVALID");
+            }
         }
-        else{
+        catch{
             res.status(401).send("SESSION_INVALID");
         }
     })

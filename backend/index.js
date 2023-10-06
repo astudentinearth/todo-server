@@ -20,7 +20,7 @@ app.use(session({
     secret: process.env["TODO_SESSION_KEY"],
     saveUninitialized: false,
     resave: false,
-    store: new (filestore(session))()
+    store: new (filestore(session))({logFn: ()=>{}})
 }))
 
 authAPI(app);

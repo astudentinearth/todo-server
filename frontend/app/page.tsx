@@ -1,5 +1,6 @@
 'use client'
 
+import Nav from "@/components/nav";
 import { useEffect } from "react"
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
   },[])
   return (
     <div>
-
+      <Nav></Nav>
     </div>
   )
 }
