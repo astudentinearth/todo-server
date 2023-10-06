@@ -17,11 +17,10 @@ export function authAPI(app){
                 if(!match){
                     return res.status(400).send("Wrong password");
                 }
-                const token = jwt.sign({
-                    username: val[0].username,
-                    userId: val[0].id
-                },process.env["FILECLOUD_JWT_KEY"],{expiresIn: "24h"})
-                return res.status(200).send({message:"Login successful", username: val[0].username, token});
+                else{
+                    req.session.user = val[0]
+                    res.status(200).send("Login success")
+                }
             })
         })
     })
@@ -37,18 +36,30 @@ export function authAPI(app){
             res.status(500).send("Couldn't hash password. User will not be registered.")
         });
     })
+
+    app.get("/logout",(req,res)=>{
+        req.session.destroy();
+        res.redirect("/");
+    })
 }
 
+/**
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {*} next 
+ */
 export async function auth(req, res, next){
     try{
-        const token = await req.headers.authorization.split(" ")[1];
-        const decoded = await jwt.verify(token, process.env["FILECLOUD_JWT_KEY"]);
-        const user= await decoded;
-        req.user=user;
-        next();
+        if(req.session.user){
+            next();
+        }
+        else{
+            next(new Error("User not logged in."))
+        }
     }
     catch(e){
         console.log(e);
-        res.status(401).send("Invalid request.");
+        res.status(401).send("401 Unauthorized");
     }
 }
