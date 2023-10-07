@@ -1,0 +1,22 @@
+.todocard{
+    display: grid;
+    grid-template-columns: 64px 400px 64px;
+    align-items: center;
+}
+
+.todocard-mobile{
+    display: grid;
+    grid-template-columns: 64px auto 64px;
+    align-items: center;
+}
+
+.todotext{
+    grid-column: 2;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+}
+
+.checkbutton{
+    justify-self: center;
+}

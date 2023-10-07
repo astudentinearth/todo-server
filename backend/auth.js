@@ -39,6 +39,7 @@ export function authAPI(app){
 
     app.get("/api/v1/logout",(req,res)=>{
         req.session.destroy();
+        res.status(200).send()
     })
 
     app.get("/api/v1/validate-session",(req,res)=>{
@@ -68,7 +69,7 @@ export async function auth(req, res, next){
             next();
         }
         else{
-            next(new Error("User not logged in."))
+            res.status(401).send("SESSION_INVALID");
         }
     }
     catch(e){

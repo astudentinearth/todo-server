@@ -1,9 +1,13 @@
 'use client'
 
 import Nav from "@/components/nav";
-import { useEffect } from "react"
+import { TodoCard } from "@/components/todoCard";
+import { TodoList } from "@/components/todoList";
+import { CreateTodo } from "@/lib/api";
+import { useEffect, useRef } from "react"
 
 export default function Home() {
+
   useEffect(()=>{
     let req = new XMLHttpRequest();
     req.onreadystatechange = ()=>{
@@ -15,8 +19,12 @@ export default function Home() {
     req.send();
   },[])
   return (
-    <div>
+    <>
       <Nav></Nav>
+      <div className="flex flex-col items-center">
+        
+        <TodoList></TodoList>
     </div>
+    </>
   )
 }

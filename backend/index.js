@@ -7,7 +7,7 @@ import { authAPI, auth } from "./auth.js";
 import session from "express-session";
 import filestore from "session-file-store"
 import { userAPI } from "./user.js";
-
+import { todoAPI } from "./todo.js";
 var app = express();
 
 app.use(cors());
@@ -25,6 +25,7 @@ app.use(session({
 
 authAPI(app);
 userAPI(app);
+todoAPI(app);
 app.get("/api/v1/auth-test",auth, (req,res)=>{
     console.log(req.user);
     res.status(200).send("Authorized");
