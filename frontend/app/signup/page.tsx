@@ -1,18 +1,22 @@
 'use client'
 import Link from "next/link"
-import { useEffect, useRef } from "react"
+import Image from "next/image"
+import loader from "@/public/loader.svg"
+import { useEffect, useRef, useState } from "react"
 
 export default function SignupPage(){
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
     const confirmPasswordRef = useRef<HTMLInputElement>(null)
+    const [working, setWorking] = useState(false);
     const login = ()=>{
         if(usernameRef.current==null) return;
         if(passwordRef.current==null) return;
         if(confirmPasswordRef.current==null) return;
-        if(usernameRef.current.value.trim().length==0){ alert("Provide an username"); return}
-        if(passwordRef.current.value.trim().length==0){ alert("Provide a password"); return}
-        if(confirmPasswordRef.current.value!==passwordRef.current.value) {alert("Passwords don't match"); return}
+        if(usernameRef.current.value.trim().length==0){ alert("Provide an username"); setWorking(false); return}
+        if(passwordRef.current.value.trim().length==0){ alert("Provide a password"); setWorking(false); return}
+        if(confirmPasswordRef.current.value!==passwordRef.current.value) {alert("Passwords don't match"); setWorking(false); return}
+        setWorking(true);
         let req = new XMLHttpRequest();
         let loginReq = new XMLHttpRequest();
         req.onreadystatechange = ()=>{
@@ -21,10 +25,12 @@ export default function SignupPage(){
             if(req.readyState!=4) return;
             if(req.status==400){
                 alert("Couldn't sign up - invalid request.")
+                setWorking(false);
                 return;
             }
             if(req.status==500){
-                alert("Internal server error, try again later.")
+                alert("Internal server error, try again later.");
+                setWorking(false);
             }
             if(req.status==200){
                 loginReq.send(JSON.stringify({username: usernameRef.current.value, password: passwordRef.current.value}))
@@ -57,7 +63,9 @@ export default function SignupPage(){
         <input ref={usernameRef} className="block w-72 mt-4 text-lg p-2 bg-black-3 rounded-md outline-none" placeholder="Username"></input>
         <input ref={passwordRef} type="password" className="block w-72 mt-4 text-lg p-2 bg-black-3 rounded-md outline-none" placeholder="Password"></input>
         <input ref={confirmPasswordRef} type="password" className="block w-72 mt-4 text-lg p-2 bg-black-3 rounded-md outline-none" placeholder="Confirm password"></input>
-        <button onClick={login} className="block mt-4 w-72 text-lg p-2 bg-primary rounded-md hover:brightness-125 active:brightness-110 transition-[filter]">Sign in</button>
+        <button onClick={login} disabled={working} className="block mt-4 text-center w-72 text-lg p-2 bg-primary disabled:brightness-75 disabled:hover:brightness-75 disabled:active:brightness-75 rounded-md hover:brightness-125 active:brightness-110 transition-[filter]">
+            {working ? <span className="text-center translate-x-[-24px]"><Image className="animate-spin inline-block" width={24} height={24} src={loader} alt="Signing in"></Image></span> : "Create account"}
+        </button>
         <span className="block text-lg mt-4">{"Already have an account? "} <Link className="text-primary hover:underline" href={"/login"}>Sign in</Link></span>
     </div>
 }
