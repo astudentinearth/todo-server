@@ -10,12 +10,12 @@ export function TodoList(){
     const [loading, setLoading] = useState(true);
     const inputRef = useRef<HTMLInputElement>(null);
     const load = async ()=>{
-        setLoading(true);
         let res = await GetTodos();
         setTodos(res);
         setLoading(false);
     }
     useEffect(()=>{
+        setLoading(true);
         load();
     },[])
     return <div className="sm:flex-grow-0 flex-grow ">
