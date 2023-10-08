@@ -3,11 +3,13 @@ import Link from "next/link"
 import Image from "next/image"
 import loader from "@/public/loader.svg"
 import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function SignupPage(){
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
     const confirmPasswordRef = useRef<HTMLInputElement>(null)
+    const router = useRouter();
     const [working, setWorking] = useState(false);
     const login = ()=>{
         if(usernameRef.current==null) return;
@@ -58,6 +60,9 @@ export default function SignupPage(){
         req.open("GET","/api/v1/validate-session",true);
         req.send();
     },[])
+    useEffect(()=>{
+        router.prefetch("/");
+    },[router]);
     return <div className="absolute left-[50%] top-[50%] bg-black-2 translate-x-[-50%] translate-y-[-50%] text-white p-4 rounded-lg drop-shadow-xl">
         <h1 className="select-none">Create account</h1>
         <input ref={usernameRef} className="block w-72 mt-4 text-lg p-2 bg-black-3 rounded-md outline-none" placeholder="Username"></input>
