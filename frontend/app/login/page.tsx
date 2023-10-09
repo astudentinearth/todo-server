@@ -17,6 +17,7 @@ export default function LoginPage(){
         if(passwordRef.current.value.trim().length==0){ alert("Provide a password"); setWorking(false); return}
         setWorking(true);
         let req = new XMLHttpRequest();
+        const username = usernameRef.current.value;
         req.onreadystatechange = ()=>{
             if(req.readyState==4 && req.status==400){
                switch(req.responseText){
@@ -27,6 +28,7 @@ export default function LoginPage(){
             }
             if(req.readyState==4 && req.status==200){
                 console.log("Logged in")
+                localStorage.setItem("username",username);
                 window.location.href="/";
             }
         }

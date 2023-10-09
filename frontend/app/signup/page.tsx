@@ -21,6 +21,7 @@ export default function SignupPage(){
         setWorking(true);
         let req = new XMLHttpRequest();
         let loginReq = new XMLHttpRequest();
+        const username = usernameRef.current.value;
         req.onreadystatechange = ()=>{
             if(usernameRef.current==null) return;
             if(passwordRef.current==null) return;
@@ -40,6 +41,7 @@ export default function SignupPage(){
         }
         loginReq.onreadystatechange = ()=>{
             if(req.readyState==4 && req.status==200){
+                localStorage.setItem("username",username);
                 window.location.href="/";
             }
         }

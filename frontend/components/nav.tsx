@@ -7,6 +7,7 @@ export default function Nav(){
     const logout = async ()=>{
         const res = await fetch('/api/v1/logout');
         if(res.ok){
+            localStorage.removeItem("username");
             window.location.href="/login"
         }
     }
@@ -17,7 +18,9 @@ export default function Nav(){
     }
 
     useEffect(()=>{
-        fetchUsername();
+        const un = localStorage.getItem("username");
+        if(un!=null) setUsername(un);
+        else fetchUsername();
     },[])
     return <div className="text-white h-12 p-2 gap-2 bg-black-2/50 backdrop-blur-md items-center flex flex-row sticky left-0 right-0 top-0">
         <div className="flex-grow"></div>
