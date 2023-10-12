@@ -9,3 +9,14 @@ body {
 h1{
   @apply font-bold text-3xl;
 }
+
+.nav:before{
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 100%;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: -1;
+}

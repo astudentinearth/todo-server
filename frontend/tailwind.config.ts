@@ -19,6 +19,9 @@ const config: Config = {
           "normal":"#25272E",
           "hover":"#2C2D36",
           "active":"#282930"
+        },
+        "red":{
+          "light":"#FF3C3C"
         }
       }
     },
