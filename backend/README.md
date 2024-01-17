@@ -15,11 +15,4 @@ Make sure to protect your secrets well 😼
 Run `npm run dev` here.
 
 ### Database configuration
-You need to set up a Postgres database for this application.
-
-Required tables:
-```
-users | username: varchar | password: varchar | id: int (unique)
-
-todos | id: int (unique) | userID: varchar | content: varchar | completed: bool
-```
+You need to set up a Postgres database for this application. You can use the sql files included here to quickly set the database up.

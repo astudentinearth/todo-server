@@ -6,7 +6,10 @@
   "scripts": {
     "dev:frontend": "npm run dev --prefix ./frontend",
     "dev:backend": "npm run dev --prefix ./backend",
-    "dev":"run-p dev:backend dev:frontend"
+    "dev":"run-p dev:backend dev:frontend",
+    "setup":"run-s setup:backend setup:frontend",
+    "setup:frontend":"npm ci --prefix ./frontend",
+    "setup:backend":"npm ci --prefix ./backend"
   },
   "author": "",
   "license": "ISC",
