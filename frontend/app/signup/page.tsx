@@ -19,8 +19,8 @@ export default function SignupPage(){
         if(passwordRef.current.value.trim().length==0){ alert("Provide a password"); setWorking(false); return}
         if(confirmPasswordRef.current.value!==passwordRef.current.value) {alert("Passwords don't match"); setWorking(false); return}
         setWorking(true);
-        let req = new XMLHttpRequest();
-        let loginReq = new XMLHttpRequest();
+        const req = new XMLHttpRequest();
+        const loginReq = new XMLHttpRequest();
         const username = usernameRef.current.value;
         req.onreadystatechange = ()=>{
             if(usernameRef.current==null) return;
@@ -53,7 +53,7 @@ export default function SignupPage(){
 
     }
     useEffect(()=>{
-        let req = new XMLHttpRequest();
+        const req = new XMLHttpRequest();
         req.onreadystatechange = ()=>{
             if(req.readyState==4 && req.status==200){
                 window.location.href="/";

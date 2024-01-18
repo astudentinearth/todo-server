@@ -16,7 +16,7 @@ export default function LoginPage(){
         if(usernameRef.current.value.trim().length==0){ alert("Provide an username"); setWorking(false); return}
         if(passwordRef.current.value.trim().length==0){ alert("Provide a password"); setWorking(false); return}
         setWorking(true);
-        let req = new XMLHttpRequest();
+        const req = new XMLHttpRequest();
         const username = usernameRef.current.value;
         req.onreadystatechange = ()=>{
             if(req.readyState==4 && req.status==400){
@@ -37,7 +37,7 @@ export default function LoginPage(){
         req.send(JSON.stringify({username: usernameRef.current.value, password: passwordRef.current.value}))
     }
     useEffect(()=>{
-        let req = new XMLHttpRequest();
+        const req = new XMLHttpRequest();
         req.onreadystatechange = ()=>{
             if(req.readyState==4 && req.status==200){
                 window.location.href="/";

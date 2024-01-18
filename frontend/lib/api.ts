@@ -1,8 +1,8 @@
 import { Todo } from "./types";
 
 export function GetTodos(): Promise<Todo[]>{
-    return new Promise((resolve, reject)=>{
-        let req = new XMLHttpRequest();
+    return new Promise((resolve )=>{
+        const req = new XMLHttpRequest();
         req.open("GET", "/api/v1/get-todos");
         req.onload = ()=>{
             if(req.status==200){
@@ -24,7 +24,7 @@ export function GetTodos(): Promise<Todo[]>{
 
 export function UpdateTodo(todo: Todo){
     return new Promise((resolve)=>{
-        let req = new XMLHttpRequest();
+        const req = new XMLHttpRequest();
         req.open("PUT", "/api/v1/update-todo");
         req.setRequestHeader("Content-Type", "application/json");
         req.onload = ()=>{
@@ -36,7 +36,7 @@ export function UpdateTodo(todo: Todo){
 
 export function DeleteTodo(todo: Todo){
     return new Promise((resolve)=>{
-        let req = new XMLHttpRequest();
+        const req = new XMLHttpRequest();
         req.open("DELETE", "/api/v1/delete-todo");
         req.setRequestHeader("Content-Type", "application/json");
         req.onload = ()=>{
@@ -48,7 +48,7 @@ export function DeleteTodo(todo: Todo){
 
 export function CreateTodo(todo:{content: string, completed: boolean}){
     return new Promise((resolve)=>{
-        let req = new XMLHttpRequest();
+        const req = new XMLHttpRequest();
         req.open("POST", "/api/v1/create-todo");
         req.setRequestHeader("Content-Type", "application/json");
         req.onload = ()=>{

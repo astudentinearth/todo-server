@@ -10,7 +10,7 @@ export function TodoList(){
     const [loading, setLoading] = useState(true);
     const inputRef = useRef<HTMLInputElement>(null);
     const load = async ()=>{
-        let res = await GetTodos();
+        const res = await GetTodos();
         setTodos(res);
         setLoading(false);
     }

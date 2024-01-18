@@ -1,6 +1,4 @@
 'use client'
-
-import { useEffect, useState } from "react";
 import AccountMenu from "./accountMenu";
 
 export default function Nav(){

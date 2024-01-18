@@ -1,15 +1,13 @@
 'use client'
 
 import Nav from "@/components/nav";
-import { TodoCard } from "@/components/todoCard";
 import { TodoList } from "@/components/todoList";
-import { CreateTodo } from "@/lib/api";
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 
 export default function Home() {
 
   useEffect(()=>{
-    let req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.onload = ()=>{
         if(req.status!=200){
             window.location.href="/login";
