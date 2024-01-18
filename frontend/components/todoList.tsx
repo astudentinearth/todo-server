@@ -19,7 +19,7 @@ export function TodoList(){
         setLoading(true);
         load();
     },[])
-    return <div className="sm:flex-grow-0 justify-center p-4 gap-2 flex flex-col flex-grow z-0">
+    return <div className="sm:flex-grow-0 justify-center p-4 gap-2 flex flex-col flex-grow z-0 w-full sm:w-auto">
         <input ref={inputRef} onKeyDown={(e)=>{
           if(e.key=="Enter"){
             if(inputRef.current==null) return;
