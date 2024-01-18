@@ -1,0 +1,13 @@
+hr{
+    opacity: 0.25;
+    margin-top: 16px;
+}
+
+h1{
+    font-size: 36px;
+}
+
+h2{
+    font-size: 24px;
+    font-weight: 600;
+}

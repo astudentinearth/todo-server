@@ -25,7 +25,7 @@ export default function AccountMenu(){
     return <div className="">
         <div onClick={()=>{
             visibility.setIsComponentVisible(!visibility.isComponentVisible)}
-            } className="w-10 h-10 bg-primary userbtn flex items-center justify-center rounded-full hover:brightness-110">
+            } className="w-10 h-10 mr-2 bg-primary userbtn flex items-center justify-center rounded-full hover:brightness-110">
             <span className="text-2xl select-none userbtn">{username[0] ?? <i className="bi-person"></i>}</span>
         </div>
         <div ref={visibility.ref} style={visibility.isComponentVisible ? {opacity: 1, visibility:"visible"} : {opacity: 0, visibility:"hidden"}} className="fixed transition-[opacity,visibility] p-2 backdrop-blur-md menu rounded-xl bg-black-3/75 w-72 right-2 top-20">
