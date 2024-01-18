@@ -4,6 +4,7 @@ import { CreateTodo, GetTodos } from "@/lib/api"
 import { Todo } from "@/lib/types"
 import { useEffect, useRef, useState } from "react"
 import { TodoCard } from "./todoCard"
+import LoadingSpinner from "./loader"
 
 export function TodoList(){
     const [todos, setTodos] = useState([] as Todo[])
@@ -18,7 +19,7 @@ export function TodoList(){
         setLoading(true);
         load();
     },[])
-    return <div className="sm:flex-grow-0 flex-grow z-0">
+    return <div className="sm:flex-grow-0 justify-center p-4 gap-2 flex flex-col flex-grow z-0">
         <input ref={inputRef} onKeyDown={(e)=>{
           if(e.key=="Enter"){
             if(inputRef.current==null) return;
@@ -26,9 +27,9 @@ export function TodoList(){
               if(inputRef.current!=null) inputRef.current.value="";
             }).then(()=>{load()})
           }
-        }} placeholder="New todo" className="outline-none block text-white bg-widget-normal p-2 rounded-md sm:w-[528px] m-4"></input>
+        }} placeholder="New todo" className="outline-none block text-white bg-widget-normal p-2 rounded-md flex-grow sm:w-[528px]"></input> 
         {
-            loading ? <span className="text-white block text-center">Loading</span>
+            loading ? <div className="flex justify-center"><LoadingSpinner width={32} height={32}></LoadingSpinner></div>
             :
             todos.map((todo)=>{return <TodoCard reloadFunction={load} key={todo.id} todo={todo}></TodoCard>})
         }
