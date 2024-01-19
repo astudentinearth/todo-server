@@ -1,7 +1,6 @@
 import { db } from "./db.js"
 import bcrypt from "bcrypt"
 import express from "express"
-import jwt from "jsonwebtoken"
 /**
  * @param {express.Express} app 
  */
@@ -18,8 +17,10 @@ export function authAPI(app){
                     return res.status(400).send("INVALID_PASSWORD");
                 }
                 else{
-                    req.session.user = val[0]
-                    res.status(200).send("LOGIN_SUCCESS")
+                    let value = {...val[0]};
+                    const {password, ...user} = value;
+                    req.session.user = user;
+                    res.status(200).send("LOGIN_SUCCESS");
                 }
             })
         })
