@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --ignore ./sessions index.js",
-    "test": "vitest"
+    "test": "vitest",
+    "build:prod": "webpack --config webpack.config.cjs",
+    "start": "node dist/backend.dist.cjs"
   },
   "author": "",
   "dependencies": {
@@ -23,6 +25,9 @@
   },
   "type": "module",
   "devDependencies": {
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.1",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   }
 }
