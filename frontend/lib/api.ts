@@ -57,3 +57,49 @@ export function CreateTodo(todo:{content: string, completed: boolean}){
         req.send(JSON.stringify({"content": todo.content, "completed": todo.completed}))
     })
 }
+
+/**
+ * Asks the backend to query the database and check if any users have this username.
+ * Authentication is not required for this API.
+ * @param username Username to be searched
+ * @returns True if user exists, false if user doesn't exist or something goes wrong
+ */
+export async function CheckUserExists(username: string){
+    try{const res = await fetch("/api/v1/user-exists", {
+        method: "GET",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({username})
+    });
+    const response = await res.json();
+    if(!("exists" in response)) {throw new Error("Invalid response");}
+    if(response.exists) return true
+    else return false}
+    catch (error){
+        if(error instanceof Error) window.alert(error.message);
+        return false;
+    }
+}
+
+/**
+ * Changes the username of currently logged in user. Authentication is required for this API.
+ * @param newName New username
+ */
+export async function ChangeUsername(newName: string){
+    try {
+        const res = await fetch("/api/v1/change-username", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({newName})
+        });
+        if(res.ok) return true;
+        else throw new Error("We couldn't change your username.")
+
+    } catch (error) {
+        if(error instanceof Error) window.alert(error.message);
+        return false;
+    }
+}
