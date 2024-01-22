@@ -20,6 +20,8 @@ export function authAPI(app){
                     let value = {...val[0]};
                     const {password, ...user} = value;
                     req.session.user = user;
+                    req.session.userAgent = req.headers["user-agent"];
+                    req.session.loginTimestamp = new Date().toISOString();
                     res.status(200).send("LOGIN_SUCCESS");
                 }
             })
