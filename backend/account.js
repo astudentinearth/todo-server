@@ -50,7 +50,6 @@ export function accountAPI(app){
             res.sendStatus(500);    
         }
     })
-    // TODO: Get all sessions
     app.get("/api/v1/get-sessions", auth, async (req,res)=>{
         try{
             console.log(typeof req.session.user.id)
@@ -72,5 +71,15 @@ export function accountAPI(app){
             res.sendStatus(500);
         }
     })
-    // TODO: End all sessions
+    app.delete("/api/v1/force-logout", auth, async (req,res)=>{
+        try {
+            const query = await db("sessions").delete().whereRaw("(sess->'user'->>'id')::int = ?", [req.session.user.id]);
+            res.status(200).send();
+        } catch (error) {
+            if (error instanceof Error){
+                console.log("\x1b[31m----Server Error----\n", error.message, "\n--Stack trace\n", error.stack, "\x1b[0m")
+            }
+            res.sendStatus(500);
+        }
+    })
 }

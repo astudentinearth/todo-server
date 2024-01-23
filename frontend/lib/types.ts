@@ -3,3 +3,9 @@ export interface Todo{
     content: string,
     completed: boolean
 }
+
+export interface UserSession{
+    userAgent: string,
+    expire: string,
+    loginTimestamp: string
+}

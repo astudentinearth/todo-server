@@ -1,4 +1,4 @@
-import { Todo } from "./types";
+import { Todo, UserSession } from "./types";
 
 export function GetTodos(): Promise<Todo[]>{
     return new Promise((resolve )=>{
@@ -97,6 +97,46 @@ export async function ChangeUsername(newName: string){
         });
         if(res.ok) return true;
         else throw new Error("We couldn't change your username.")
+
+    } catch (error) {
+        if(error instanceof Error) window.alert(error.message);
+        return false;
+    }
+}
+
+export async function ChangePassword(oldPassword: string, newPassword: string){
+    try{
+        const res = await fetch("/api/v1/change-password", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({oldPassword, newPassword})});
+        if(res.ok) return true;
+        else throw new Error("Password change failed.");
+    }
+    catch(error){
+        if(error instanceof Error) window.alert(error.message);
+        return false;
+    }
+}
+
+export async function GetUserSessions(){
+    try {
+        const res = await fetch("/api/v1/get-sessions", {method: "POST", headers: {"Content-Type": "application/json"}});
+        if(!res.ok) throw new Error("Couldn't fetch user sessions.");
+        const body = await res.json();
+        if(!("sessions" in body)) throw new Error("Response body is empty.");
+        if(Array.isArray(body.sessions)){
+            return body.sessions as UserSession[];
+        }
+        else throw new Error("Bad response.");
+    } catch (error) {
+        if(error instanceof Error) window.alert(error.message);
+        return null;
+    }
+}
+
+export async function LogoutAllDevices(){
+    try {
+        const res = await fetch("/api/v1/force-logout", {method: "DELETE"});
+        if(!res.ok) throw new Error("Logout failed.");
+        else return true;
 
     } catch (error) {
         if(error instanceof Error) window.alert(error.message);
