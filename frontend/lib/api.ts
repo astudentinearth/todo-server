@@ -118,7 +118,7 @@ export async function ChangePassword(oldPassword: string, newPassword: string){
 
 export async function GetUserSessions(){
     try {
-        const res = await fetch("/api/v1/get-sessions", {method: "POST", headers: {"Content-Type": "application/json"}});
+        const res = await fetch("/api/v1/get-sessions", {method: "GET", headers: {"Content-Type": "application/json"}});
         if(!res.ok) throw new Error("Couldn't fetch user sessions.");
         const body = await res.json();
         if(!("sessions" in body)) throw new Error("Response body is empty.");
