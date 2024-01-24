@@ -5,7 +5,8 @@ export interface Todo{
 }
 
 export interface UserSession{
-    userAgent: string,
+    os: string,
+    browser: string,
     expire: string,
     loginTimestamp: string
 }

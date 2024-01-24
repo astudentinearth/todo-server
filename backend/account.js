@@ -3,6 +3,7 @@ import express from 'express'
 import {validateUsername} from './lib/username.js'
 import { db } from "./db.js";
 import bcrypt from "bcrypt"
+import Bowser from "bowser"
 
 /**
  * @param {express.Express} app 
@@ -59,9 +60,14 @@ export function accountAPI(app){
                 return;
             }
             const results = (await db("sessions").select().whereRaw("(sess->'user'->>'id')::int = ?", [req.session.user.id]));
-            const sessions = results.map((x)=>({
-                expire: x.expire, userAgent: (x.sess.userAgent ?? "Unknown device"), loginTimestamp: x.sess.loginTimestamp
-            }));
+            const sessions = results.map((x)=>{
+                const metadata = Bowser.getParser(x.sess.userAgent);
+                const browser = metadata.getBrowserName()
+		        console.log(JSON.stringify(metadata));
+                return {
+                expire: x.expire, browser: (!!browser ? browser : x.sess.userAgent), os: (metadata.getOSName() ?? "Unknown OS") , loginTimestamp: x.sess.loginTimestamp
+                }
+            });
             res.status(200).send({sessions});
         }
         catch(error){

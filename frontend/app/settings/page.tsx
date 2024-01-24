@@ -9,7 +9,7 @@ export default function SettingsPage() {
     <>
         <Nav></Nav>
         <div className="text-white sm:flex sm:flex-col sm:items-center">
-            <div className="sm:w-[620px] p-4 w-full flex flex-col gap-3 flex-grow ">
+            <div className="sm:w-[620px] lg:w-[800px] transition-[width] p-4 w-full flex flex-col gap-3 flex-grow ">
                 <h1 className="">Settings</h1>
                 <SecurityWidget></SecurityWidget>
                 <AccountWidget></AccountWidget>
