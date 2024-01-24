@@ -1,8 +1,9 @@
 .menu{
     display: grid;
     grid-template-columns: 64px auto;
-    grid-template-rows: 64px 48px;
-    gap: 8px;
+    grid-template-rows: 64px;
+    grid-auto-rows: 48px;
+    gap: 4px;
     box-shadow: 0 4px 16px 0px rgba(0,0,0,0.4);
 }
 

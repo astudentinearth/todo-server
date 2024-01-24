@@ -2,40 +2,27 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/backend/backend.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
+            "label": "devTasks",
+            "type": "shell",
+            "command": "",
+            "group":"none",
+            "dependsOn": ["backendDevCommand", "frontendDevCommand"]
         },
         {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/backend/backend.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
+            "label": "frontendDevCommand",
+            "type": "shell",
+            "command": "npm run dev",
+            "options": {
+                "cwd": "./frontend"
+            }
         },
         {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "--project",
-                "${workspaceFolder}/backend/backend.sln"
-            ],
-            "problemMatcher": "$msCompile"
+            "label": "backendDevCommand",
+            "type": "shell",
+            "command": "npm run dev",
+            "options": {
+                "cwd": "./backend"
+            }
         }
     ]
 }
