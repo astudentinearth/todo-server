@@ -15,3 +15,11 @@ CREATE TABLE IF NOT EXISTS public.users
     CONSTRAINT users_pkey PRIMARY KEY (id),
     CONSTRAINT users_username_key UNIQUE (username)
 )
+
+CREATE TABLE IF NOT EXISTS public.sessions
+(
+    sid character varying COLLATE pg_catalog."default" NOT NULL,
+    sess json NOT NULL,
+    expire timestamp(6) without time zone NOT NULL,
+    CONSTRAINT session_pkey PRIMARY KEY (sid)
+)
