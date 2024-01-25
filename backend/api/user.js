@@ -1,6 +1,6 @@
 import express from "express"
 import { auth } from "./auth.js"
-import { db } from "./db.js";
+import { db } from "../lib/db.js";
 /**
  * 
  * @param {express.Express} app 

@@ -1,7 +1,7 @@
 import { auth } from "./auth.js";
 import express from 'express'
-import {validateUsername} from './lib/username.js'
-import { db } from "./db.js";
+import {validateUsername} from '../lib/username.js'
+import { db } from "../lib/db.js";
 import bcrypt from "bcrypt"
 import Bowser from "bowser"
 
