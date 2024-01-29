@@ -4,25 +4,9 @@
         {
             "label": "devTasks",
             "type": "shell",
-            "command": "",
-            "group":"none",
-            "dependsOn": ["backendDevCommand", "frontendDevCommand"]
-        },
-        {
-            "label": "frontendDevCommand",
-            "type": "shell",
             "command": "npm run dev",
-            "options": {
-                "cwd": "./frontend"
-            }
-        },
-        {
-            "label": "backendDevCommand",
-            "type": "shell",
-            "command": "npm run dev",
-            "options": {
-                "cwd": "./backend"
-            }
+            "group":"none"
         }
+
     ]
 }
