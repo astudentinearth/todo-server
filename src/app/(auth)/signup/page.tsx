@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link"
 import Image from "next/image"
-import loader from "@/public/loader.svg"
+import loader from "public/loader.svg"
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 
