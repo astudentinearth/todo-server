@@ -12,6 +12,7 @@ import Bowser from "bowser";
 // FIXME: This action requires middleware as a measure against DDOS attacks.
 // Susceptible to the creation of thousands of accounts in a matter of seconds
 export async function signup(username: string, password: string) : Promise<string | never>{
+    username=username.trim();
     // username validation
     if(!/^[a-zA-Z0-9_]+$/.test(username)){
         return "Username contains invalid characters.";
@@ -19,6 +20,7 @@ export async function signup(username: string, password: string) : Promise<strin
     if(username.length>32) return "Username too long. Pick one that is 32 characters at maximum.";
 
     // password validation
+    password = password.trim();
     if(password.length<8) return "Password must be at least 8 characters.";
     if(password.length>64) return "Password length should not exceed 64 characters";
     const hashed_password = await bcrypt.hash(password, 10);
@@ -52,6 +54,8 @@ export async function logout(){
 }
 
 export async function login(username: string, password: string): Promise<string>{
+    username=username.trim();
+    password = password.trim();
     if(username.length > 64 || !/^[a-zA-Z0-9_]+$/.test(username)) return "Invalid username";
     const existingUser = await prisma?.users.findUnique({where: {username}});
     if(!existingUser || !existingUser.hashed_password){
@@ -86,6 +90,7 @@ export const getUser = cache(async () => {
 });
 
 export async function ChangeUsername(newName: string){
+    newName=newName.trim();
     const {user} = await validateRequest();
     if(!user) return [];
     if(newName.length > 64) return "Username too long.";
@@ -102,6 +107,8 @@ export async function ChangeUsername(newName: string){
 }
 
 export async function ChangePassword(oldPassword: string,newPassword: string){
+    oldPassword = oldPassword.trim();
+    newPassword = newPassword.trim();
     const {user} = await validateRequest();
     if(!user) return "You are not logged in.";
     if(oldPassword.length < 8) return "Password too short";
