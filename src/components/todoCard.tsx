@@ -3,6 +3,7 @@ import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import "./todoCard.css"
 import { Todo } from "@/lib/types";
 import { DeleteTodo, UpdateTodo } from "@/lib/actions/todo.actions"
+import { TextInput } from "./ui";
 interface TodoCardProps{
     todo: Todo,
     reloadFunction: ()=>void
@@ -40,10 +41,10 @@ export function TodoCard(props:TodoCardProps){
     return <div onClick={(e)=>{
         e.preventDefault();
         setEdit(true);
-        }} className={"grid h-16 bg-black-3 hover:brightness-110 active:brightness-125 rounded-lg text-white todocard-mobile sm:todocard transition-[width]" + (edit ? "brightness-125" : "")}>
+        }} className={"grid h-16 bg-black-3 hover:brightness-110 active:brightness-125 rounded-lg text-white todocard-mobile sm:todocard transition-[filter]" + (edit ? "brightness-125" : "")}>
         <button onClick={toggleCheck} className={completed ? CHECKED_CLASSNAMES : UNCHECKED_CLASSNAMES}><i className={completed ? "bi-check-lg" : ""}></i></button>
-        {edit ? <input ref={editRef} onKeyDown={handleKeydown} onBlur={handleEditComplete} className="outline-none block w-full bg-widget-normal p-2 rounded-md"></input> 
+        {edit ? <TextInput inputRef={editRef} onKeyDown={handleKeydown} onBlur={handleEditComplete} className="outline-none block w-full bg-widget-normal p-2 rounded-md"></TextInput> 
         : <span ref={textRef} className="todotext select-none w-[200px] sm:w-[400px]">{content}</span>}
-        <button onClick={handleDelete} className="hover:bg-red-400/90 rounded-full w-8 h-8 justify-self-center"><i className="bi-x-lg"></i></button>
+        <button onClick={handleDelete} className="hover:bg-red-400/90 rounded-full transition-colors w-8 h-8 justify-self-center"><i className="bi-x-lg"></i></button>
     </div>
 }

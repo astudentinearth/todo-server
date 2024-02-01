@@ -19,5 +19,7 @@ const InputStyles = {
 }
 
 export function TextInput(props: TextInputProps){
-    return <input ref={props.inputRef} {...props} className={"text-base block transition-colors bg-black-1 outline-none border-[1px] p-2 rounded-lg" + " " + InputStyles[(props.error ? "error" : "normal")] + " " + (props.className ?? "")}></input>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {inputRef, ...attr} = props;
+    return <input ref={props.inputRef} {...attr} className={"text-base block transition-colors bg-black-1 outline-none border-[1px] p-2 rounded-lg" + " " + InputStyles[(props.error ? "error" : "normal")] + " " + (props.className ?? "")}></input>
 }
