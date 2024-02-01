@@ -1,10 +1,10 @@
 'use client'
 
-import { CreateTodo, GetTodos } from "@/lib/api"
 import { Todo } from "@/lib/types"
 import { useEffect, useRef, useState } from "react"
 import { TodoCard } from "./todoCard"
 import LoadingSpinner from "./loader"
+import { CreateTodo, GetTodos } from "@/lib/actions/todo.actions"
 
 export function TodoList(){
     const [todos, setTodos] = useState([] as Todo[])
@@ -12,6 +12,12 @@ export function TodoList(){
     const inputRef = useRef<HTMLInputElement>(null);
     const load = async ()=>{
         const res = await GetTodos();
+        if(!res) {
+          setTodos([]);
+          alert("Could not load your tasks right now.")
+          return;
+        }
+        sortTodos(res);
         setTodos(res);
         setLoading(false);
     }
@@ -34,4 +40,14 @@ export function TodoList(){
             todos.map((todo)=>{return <TodoCard reloadFunction={load} key={todo.id} todo={todo}></TodoCard>})
         }
     </div>
+}
+
+function sortTodos(todos: Todo[]){
+  todos.sort((a,b)=>{
+    const _b = /(\d+)\$/.exec(b.id);
+    const _a =/(\d+)\$/.exec(a.id);
+    if(!_b || ! _a) return 0;
+    if(_b[1] == null || _a[1] == null) return 0;
+    return Number(_b[1]) - Number(_a[1])
+  })
 }

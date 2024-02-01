@@ -1,11 +1,12 @@
-'use client'
 import Nav from "@/components/nav";
-import useAuthentication from "../hooks/useAuthentication";
 import "./settings.css"
 import { AccountWidget, SecurityWidget } from "@/components/settings";
-export default function SettingsPage() {
-    const [auth] = useAuthentication();
-    return (auth?
+import { getUser } from "@/lib/actions/auth.actions";
+import { redirect } from "next/navigation";
+export default async function SettingsPage() {
+    const user = getUser();
+    if(!user) redirect("/login");
+    return (
     <>
         <Nav></Nav>
         <div className="text-white sm:flex sm:flex-col sm:items-center">
@@ -21,5 +22,5 @@ export default function SettingsPage() {
             </div>
         </div> 
     </> 
-    : <></>)
+    )
 }

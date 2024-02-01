@@ -2,8 +2,7 @@
 import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import "./todoCard.css"
 import { Todo } from "@/lib/types";
-import { DeleteTodo, UpdateTodo } from "@/lib/api";
-
+import { DeleteTodo, UpdateTodo } from "@/lib/actions/todo.actions"
 interface TodoCardProps{
     todo: Todo,
     reloadFunction: ()=>void

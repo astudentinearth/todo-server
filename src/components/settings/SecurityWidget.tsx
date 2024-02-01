@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ChangePasswordDialog } from "../dialogs";
 import { Button } from "../ui";
 import { UserSession } from "@/lib/types";
-import { GetUserSessions } from "@/lib/api";
+import { GetUserSessions } from "@/lib/actions/auth.actions";
 
 export function SecurityWidget(){
     const [changePassVisible, setChangePassVisible] = useState(false);

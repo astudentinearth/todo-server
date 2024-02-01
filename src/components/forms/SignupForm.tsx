@@ -19,7 +19,7 @@ export default function SignupForm(){
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
         const result = await signup(username, password);
-        if(result!=="OK") alert(result);
+        if(result !== "" && result != null) alert(result);
         setWorking(false);
     }
     return <form>

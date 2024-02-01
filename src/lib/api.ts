@@ -1,3 +1,7 @@
+/**
+ * @deprecated This API has been dropped. Use new server actions instead.
+ */
+
 import { Todo, UserSession } from "./types";
 
 export function GetTodos(): Promise<Todo[]>{

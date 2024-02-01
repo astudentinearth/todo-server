@@ -1,4 +1,3 @@
-'use client'
 import AccountMenu from "./accountMenu";
 
 export default function Nav(){

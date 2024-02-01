@@ -15,6 +15,9 @@ export const lucia = new Lucia(adapter, {
         return {
             username: attributes.username
         };
+    },
+    getSessionAttributes: (attributes: DatabaseSessionAttributes) => {
+        return {userAgent: attributes.userAgent, creationTime: attributes.creationTime};
     }
 })
 
@@ -22,12 +25,19 @@ declare module "lucia" {
     interface Register{
         Lucia: typeof lucia;
         DatabaseUserAttributes: DatabaseUserAttributes;
+        DatabaseSessionAttributes: DatabaseSessionAttributes
     }
+  
 }
 
 interface DatabaseUserAttributes{
     username: string
 }
+
+interface DatabaseSessionAttributes{
+    userAgent: string,
+    creationTime: Date
+}  
 
 export const validateRequest = cache(async (): Promise<{user: User, session: Session} | {user:null, session: null}> => {
     const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;

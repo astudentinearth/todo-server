@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@lucia-auth/adapter-postgresql": "^3.0.0",
+    "@prisma/client": "^5.9.0",
     "bcrypt": "^5.1.1",
     "bootstrap-icons": "^1.11.1",
+    "bowser": "^2.11.0",
     "lucia": "^3.0.1",
     "next": "^14.1.0",
     "oslo": "^1.0.3",

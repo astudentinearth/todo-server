@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button, TextInput } from "../ui";
 import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
-import { ChangePassword } from "@/lib/api";
+import { ChangePassword } from "@/lib/actions/auth.actions";
 
 export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
     // Error message to be shown at the bottom
@@ -62,12 +62,12 @@ export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
         if(newPwRef.current==null) return;
         setWorking(true);
         const result = await ChangePassword(currentPwRef.current.value, newPwRef.current.value);
-        if(result) {
+        if(result===true) {
             props.setVisible(false);
             setWorking(false);
             setFormValid(false);
             window.alert("Your password has been changed.");
-        }
+        } else alert(result);
         setWorking(false);
     }
     return <ModalBase {...props}>

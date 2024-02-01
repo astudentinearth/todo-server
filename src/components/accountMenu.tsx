@@ -3,26 +3,18 @@ import { useState, useEffect } from "react";
 import './accountMenu.css'
 import useComponentVisible from "@/app/hooks/useComponentVisible";
 import { useRouter } from "next/navigation";
+import { getUser, logout } from "@/lib/actions/auth.actions";
 export default function AccountMenu(){
     const [username, setUsername] = useState("");
     const router = useRouter();
     const visibility = useComponentVisible(false, "userbtn");
     const fetchUsername = async ()=>{
-        const res = await fetch("/api/v1/get-username");
-        if(res.ok) setUsername(await res.text());
+        const res = await getUser();
+        if(!res) return;
+        setUsername(res.username);
     }
-    const logout = async ()=>{
-        const res = await fetch('/api/v1/logout');
-        if(res.ok){
-            localStorage.removeItem("username");
-            window.location.href="/login"
-        }
-    }
-    
     useEffect(()=>{
-        const un = localStorage.getItem("username");
-        if(un!=null) setUsername(un);
-        else fetchUsername();
+        (async ()=>{await fetchUsername();})();
     },[])
     return <div className="">
         <div onClick={()=>{
@@ -39,7 +31,7 @@ export default function AccountMenu(){
                 <i className="bi-gear"></i>
                 <span>Settings</span>
             </div>
-            <div onClick={logout} className="z-10 account-menu-button rounded-lg hover:bg-red-600/25 active:brightness-125 transition-[filter,background]">
+            <div onClick={async ()=>{await logout()}} className="z-10 account-menu-button rounded-lg hover:bg-red-600/25 active:brightness-125 transition-[filter,background]">
                 <i className="bi-box-arrow-right"></i>
                 <span>Sign out</span>
             </div>
