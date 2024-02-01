@@ -1,10 +1,11 @@
 'use client'
 
 import { Todo } from "@/lib/types"
-import { useEffect, useRef, useState } from "react"
+import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { TodoCard } from "./todoCard"
 import LoadingSpinner from "./loader"
 import { CreateTodo, GetTodos } from "@/lib/actions/todo.actions"
+import { TextInput } from "./ui"
 
 export function TodoList(){
     const [todos, setTodos] = useState([] as Todo[])
@@ -25,18 +26,18 @@ export function TodoList(){
         setLoading(true);
         load();
     },[])
-    return <div className="sm:flex-grow-0 justify-center p-4 gap-2 flex flex-col flex-grow z-0 w-full sm:w-auto">
-        <input ref={inputRef} onKeyDown={(e)=>{
-          if(e.key=="Enter"){
-            if(inputRef.current==null) return;
-            CreateTodo({completed: false, content: inputRef.current.value}).then(()=>{
-              if(inputRef.current!=null) inputRef.current.value="";
-            }).then(()=>{load()})
-          }
-        }} placeholder="New todo" className="outline-none block text-white bg-widget-normal p-2 rounded-md flex-grow sm:w-[528px]"></input> 
+    const inputKeyDown = (e: KeyboardEvent)=>{
+      if(e.key=="Enter"){
+        if(inputRef.current==null) return;
+        CreateTodo({completed: false, content: inputRef.current.value}).then(()=>{
+          if(inputRef.current!=null) inputRef.current.value="";
+        }).then(()=>{load()})
+      }
+    }
+    return <div className="sm:flex-grow-0 justify-center p-4 pt-2 gap-2 flex flex-col flex-grow z-0 w-full sm:w-[640px]">
+        <TextInput inputRef={inputRef} onKeyDown={inputKeyDown} placeholder="New todo" className="outline-none flex text-white p-3 rounded-md w-full sm:w-[608px]"></TextInput> 
         {
-            loading ? <div className="flex justify-center"><LoadingSpinner width={32} height={32}></LoadingSpinner></div>
-            :
+            loading ? <div className="flex justify-center"><LoadingSpinner width={32} height={32}></LoadingSpinner></div>:
             todos.map((todo)=>{return <TodoCard reloadFunction={load} key={todo.id} todo={todo}></TodoCard>})
         }
     </div>

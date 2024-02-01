@@ -1,15 +1,16 @@
-import Nav from "@/components/nav";
 import { TodoList } from "@/components/todoList";
 import { getUser } from "@/lib/actions/auth.actions";
 import { redirect } from "next/navigation";
+import { Header } from "../components/Header";
+
 
 export default async function Home() {
   const user = await getUser();
-  if(!user) redirect("/login");
+  if (!user) redirect("/login");
   return (
     <>
-      <Nav></Nav>
       <div className="flex flex-col items-center">
+        <Header username={user.username}></Header>
         <TodoList></TodoList>
       </div>
     </>

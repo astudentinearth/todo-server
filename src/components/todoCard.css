@@ -1,6 +1,6 @@
 .todocard{
     display: grid;
-    grid-template-columns: 64px 400px 64px;
+    grid-template-columns: 64px 480px 64px;
     align-items: center;
 }
 

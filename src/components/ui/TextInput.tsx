@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FocusEventHandler, RefObject } from "react";
+import { ChangeEventHandler, FocusEventHandler, KeyboardEventHandler, RefObject } from "react";
 
 interface TextInputProps{
     inputRef?: RefObject<HTMLInputElement>,
@@ -9,7 +9,8 @@ interface TextInputProps{
     onFocus?: FocusEventHandler,
     className?: string,
     type?: "text" | "password",
-    required?: boolean
+    required?: boolean,
+    onKeyDown?: KeyboardEventHandler
 }
 
 const InputStyles = {

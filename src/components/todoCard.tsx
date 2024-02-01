@@ -40,7 +40,7 @@ export function TodoCard(props:TodoCardProps){
     return <div onClick={(e)=>{
         e.preventDefault();
         setEdit(true);
-        }} className={"grid h-16 bg-black-3 hover:brightness-110 active:brightness-125 rounded-lg text-white todocard-mobile sm:todocard " + (edit ? "brightness-125" : "")}>
+        }} className={"grid h-16 bg-black-3 hover:brightness-110 active:brightness-125 rounded-lg text-white todocard-mobile sm:todocard transition-[width]" + (edit ? "brightness-125" : "")}>
         <button onClick={toggleCheck} className={completed ? CHECKED_CLASSNAMES : UNCHECKED_CLASSNAMES}><i className={completed ? "bi-check-lg" : ""}></i></button>
         {edit ? <input ref={editRef} onKeyDown={handleKeydown} onBlur={handleEditComplete} className="outline-none block w-full bg-widget-normal p-2 rounded-md"></input> 
         : <span ref={textRef} className="todotext select-none w-[200px] sm:w-[400px]">{content}</span>}
