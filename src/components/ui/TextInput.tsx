@@ -8,7 +8,8 @@ interface TextInputProps{
     onBlur?: FocusEventHandler,
     onFocus?: FocusEventHandler,
     className?: string,
-    type?: "text" | "password"
+    type?: "text" | "password",
+    required?: boolean
 }
 
 const InputStyles = {
@@ -17,5 +18,5 @@ const InputStyles = {
 }
 
 export function TextInput(props: TextInputProps){
-    return <input ref={props.inputRef} {...props} className={"text-base transition-colors bg-black-1 outline-none border-[1px] p-2 rounded-lg" + " " + InputStyles[(props.error ? "error" : "normal")] + " " + (props.className ?? "")}></input>
+    return <input ref={props.inputRef} {...props} className={"text-base block transition-colors bg-black-1 outline-none border-[1px] p-2 rounded-lg" + " " + InputStyles[(props.error ? "error" : "normal")] + " " + (props.className ?? "")}></input>
 }

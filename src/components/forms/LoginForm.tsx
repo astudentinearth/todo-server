@@ -1,13 +1,15 @@
 "use client"
 
 import { login } from "@/lib/actions/auth.actions";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { Button, TextInput } from "../ui";
 
 export default function LoginForm(){
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
     const [working, setWorking] = useState(false);
+    const [formValid, setFormValid] = useState(false);
     const handleClick = async ()=>{
         if(usernameRef.current==null) return;
         if(passwordRef.current==null) return;
@@ -20,11 +22,20 @@ export default function LoginForm(){
         if(result !== "" && result != null) alert(result);
         setWorking(false);
     }
+    const validate = ()=>{
+        if(usernameRef.current==null || passwordRef.current==null) return;
+        if(usernameRef.current.value.trim().length==0){ setFormValid(false); return}
+        if(usernameRef.current.value.trim().length > 64) {setFormValid(false); return}
+        if(!/^[a-zA-Z0-9_]+$/.test(usernameRef.current.value)) {setFormValid(false); return}
+        if(passwordRef.current.value.trim().length==0){ setFormValid(false); return}
+        setFormValid(true);
+    }
+    useEffect(()=>{setFormValid(false)},[]);
     return <form>
-        <input ref={usernameRef} className="block w-72 mt-4 text-lg p-2 bg-black-3 rounded-md outline-none" placeholder="Username"></input>
-        <input ref={passwordRef} type="password" className="block w-72 mt-4 text-lg p-2 bg-black-3 rounded-md outline-none" placeholder="Password"></input>
-        <button onClick={handleClick} disabled={working} className="block mt-4 text-center w-72 text-lg p-2 bg-primary disabled:brightness-75 disabled:hover:brightness-75 disabled:active:brightness-75 rounded-md hover:brightness-125 active:brightness-110 transition-[filter]">
+        <TextInput onChange={validate} required inputRef={usernameRef} className="w-72 mt-4 text-lg p-2 bg-black-2" placeholder="Username"></TextInput>
+        <TextInput onChange={validate} required inputRef={passwordRef} type="password" className="w-72 mt-4 text-lg p-2 bg-black-2" placeholder="Password"></TextInput>
+        <Button onClick={handleClick} type="submit" disabled={working || !formValid} className="block mt-4 text-center w-72 text-lg p-2">
             {working ? <span className="text-center translate-x-[-24px]"><Image className="animate-spin inline-block" width={24} height={24} src="/loader.svg" alt="Signing in"></Image></span> : "Sign in"}
-        </button>
+        </Button>
     </form>
 }
