@@ -16,7 +16,7 @@ model sessions {
 }
 
 model todos {
-  id        String   @id @default(dbgenerated("nextval('todos_id_seq'::regclass)"))
+  id        String   @id @unique @default(dbgenerated("nextval('todos_id_seq'::regclass)"))
   userID    String
   content   String?  @db.VarChar(255)
   completed Boolean?
@@ -30,8 +30,10 @@ model users {
 }
 
 model user_sessions {
-  id         String   @id
-  expires_at DateTime @db.Timestamptz(6)
-  user_id    String
-  users      users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id           String    @id
+  expires_at   DateTime  @db.Timestamptz(6)
+  user_id      String
+  userAgent    String?
+  creationTime DateTime? @db.Timestamptz(6)
+  users        users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
