@@ -24,7 +24,7 @@
 ```bash
 POSTGRES_PASSWORD = "password" # password for postgres
 POSTGRES_USER = "postgres_username" # username for postgres
-POSTGRES_DATABASE = "todoapp" # database to use
+POSTGRES_DB = "todoapp" # database to use
 PG_HOST = "127.0.0.1" # hostname for postgres
 PG_PORT = "5432" # port for database connection
 DATABASE_URL = "postgresql://user:password@localhost:5432/todoapp?schema=public" # database URL for prisma
