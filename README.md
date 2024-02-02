@@ -28,7 +28,6 @@ POSTGRES_DATABASE = "todoapp" # database to use
 PG_HOST = "127.0.0.1" # hostname for postgres
 PG_PORT = "5432" # port for database connection
 DATABASE_URL = "postgresql://user:password@localhost:5432/todoapp?schema=public" # database URL for prisma
-TODO_SESSION_KEY = "session_cookie_secret" # secret used to sign the session cookie - generate some long random string with OpenSSL
 ```
 
 Make sure to protect your secrets well 😼
