@@ -11,7 +11,7 @@
 - [ ] Data export
 - [ ] Account deletion
 - [ ] Rate limiting with a Redis database
-- [ ] Easy setup with Docker
+- [X] Easy setup with Docker
 
 ### Tech stack
 - Next.js 14
@@ -29,7 +29,12 @@ PG_HOST = "127.0.0.1" # hostname for postgres
 PG_PORT = "5432" # port for database connection
 DATABASE_URL = "postgresql://user:password@localhost:5432/todoapp?schema=public" # database URL for prisma
 ```
+Make sure to protect your secrets well 😼  
+### Running with Docker
+- Change `PG_HOST` to `db` and change your connection string to match that.  
+- Run `docker compose up`  
 
-Make sure to protect your secrets well 😼
+You should be good to go  
+
 ### Database configuration
 You need to set up a Postgres database for this application. You can use the sql files included here to quickly set the database up.
