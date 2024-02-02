@@ -25,6 +25,7 @@ export function EndAllSessionsDialog(props: Omit<ModalProps, "children">){
         setWorking(true);
         const result = await ForceLogout(currentPwRef.current.value.trim());
         if(result != null) alert(result);
+        setWorking(false);
     }
     return <ModalBase {...props}>
     <div className="flex flex-col gap-4">
