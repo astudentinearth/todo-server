@@ -7,14 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model sessions {
-  sid    String   @id(map: "session_pkey") @db.VarChar
-  sess   Json     @db.Json
-  expire DateTime @db.Timestamp(6)
-
-  @@index([expire], map: "IDX_session_expire")
-}
-
 model todos {
   id        String   @id @unique @default(dbgenerated("nextval('todos_id_seq'::regclass)"))
   userID    String
