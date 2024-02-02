@@ -1,6 +1,6 @@
 -- CreateTable
-CREATE TABLE "todos" (
-    "id" TEXT NOT NULL DEFAULT nextval('todos_id_seq'::regclass),
+CREATE TABLE IF NOT EXISTS "todos" (
+    "id" TEXT NOT NULL,
     "userID" TEXT NOT NULL,
     "content" VARCHAR(255),
     "completed" BOOLEAN,
@@ -9,8 +9,8 @@ CREATE TABLE "todos" (
 );
 
 -- CreateTable
-CREATE TABLE "users" (
-    "id" TEXT NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+CREATE TABLE IF NOT EXISTS "users" (
+    "id" TEXT NOT NULL,
     "username" VARCHAR(32) NOT NULL,
     "hashed_password" TEXT,
 
@@ -18,7 +18,7 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
-CREATE TABLE "user_sessions" (
+CREATE TABLE IF NOT EXISTS "user_sessions" (
     "id" TEXT NOT NULL,
     "expires_at" TIMESTAMPTZ(6) NOT NULL,
     "user_id" TEXT NOT NULL,
