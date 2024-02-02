@@ -7,9 +7,9 @@
 - [X] Todos
 - [X] Editable todos
 - [X] Session management (log out all devices)
-- [ ] Change username and password
+- [X] Change username and password
 - [ ] Data export
-- [ ] Account deletion
+- [X] Account deletion
 - [ ] Rate limiting with a Redis database
 - [X] Easy setup with Docker
 
