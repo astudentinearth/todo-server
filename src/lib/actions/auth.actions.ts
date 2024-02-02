@@ -141,9 +141,19 @@ export async function GetUserSessions(){
     })
 }
 
-export async function ForceLogout(){
+export async function ForceLogout(password: string){
     const {user} = await validateRequest();
     if(!user) return [];
-    lucia.invalidateUserSessions(user.id);
+    password = password.trim();
+    try {
+        if(!prisma) return "We can't reach our database at the moment.";
+        const db_user = await prisma.users.findUniqueOrThrow({where:{id: user.id}});
+        if(!db_user) return "No such user. Are you a zombie?";
+        const valid = await bcrypt.compare(password, db_user.hashed_password);
+        if(!valid) return "Incorrect password. You will not be signed out."
+        else lucia.invalidateUserSessions(user.id);
+    } catch (error) {
+        if (error instanceof Error) console.log(error.message, error.stack);
+    }
     return redirect("/login");
 }

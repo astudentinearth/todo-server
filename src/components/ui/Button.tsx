@@ -19,5 +19,5 @@ export function Button(props: ButtonProps){
     } else classnames = ButtonStyles["primary"]
     if(props.disabled) classnames = ButtonStyles["disabled"]
     classnames += " " + (props.radius ?? "")
-    return <button {...props} className={"p-2 text-base block select-none rounded-lg overflow-x-hidden" + " " + (props.className ?? "") + " " + classnames}>{props.children}</button>
+    return <button {...props} className={"p-2 text-base block select-none rounded-lg overflow-x-hidden overflow-y-hidden" + " " + (props.className ?? "") + " " + classnames}>{props.children}</button>
 }
