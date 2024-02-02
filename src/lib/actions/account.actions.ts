@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { lucia } from "../auth";
 import { getUser } from "./auth.actions";
+import { prisma } from "@/lib/db";
 import bcrypt from "bcrypt"
 
 export async function DeleteAccount(password: string){

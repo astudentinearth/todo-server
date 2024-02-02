@@ -2,6 +2,7 @@
 
 import { Todo } from "../types"
 import { validateRequest } from "../auth"
+import { prisma } from "@/lib/db";
 
 export async function GetTodos(): Promise<Todo[] | null>{
     const {user} = await validateRequest();

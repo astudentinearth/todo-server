@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { cache } from "react";
 import { UserSession } from "../types";
 import Bowser from "bowser";
+import { prisma } from "@/lib/db";
 
 // FIXME: This action requires middleware as a measure against DDOS attacks.
 // Susceptible to the creation of thousands of accounts in a matter of seconds
