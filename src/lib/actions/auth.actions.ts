@@ -89,20 +89,25 @@ export const getUser = cache(async () => {
     return user;
 });
 
-export async function ChangeUsername(newName: string){
+export async function ChangeUsername(newName: string, password: string){
     newName=newName.trim();
+    password = password.trim();
     const {user} = await validateRequest();
-    if(!user) return [];
+    if(!user) return "You are not logged in.";
     if(newName.length > 64) return "Username too long.";
     try{
-        if(!prisma) return;
+        if(!prisma) return "We can't reach our database at the moment.";
+        const db_user = await prisma.users.findUniqueOrThrow({where:{id: user.id}});
+        if(!db_user) return "No such user. Are you a zombie?";
+        const valid = await bcrypt.compare(password, db_user.hashed_password);
+        if(!valid) return "Incorrect password. Your username will not be changed."
         const res = await prisma.users.findUnique({where: {username: newName}});
         if(res!=null) return "Username not available.";
-        prisma.users.update({where: {id: user.id}, data: {username: newName}});
+        await prisma.users.update({where: {id: user.id}, data: {username: newName}});
     }
     catch (error) {
         if(error instanceof Error) console.log(error.message, error.stack)
-        return null;
+        return "An error occured. Your username has not been changed.";
     }
 }
 
