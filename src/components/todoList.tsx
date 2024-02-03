@@ -6,6 +6,7 @@ import { TodoCard } from "./todoCard"
 import LoadingSpinner from "./loader"
 import { CreateTodo, GetTodos } from "@/lib/actions/todo.actions"
 import { TextInput } from "./ui"
+import { sortTodos } from "@/lib/util"
 
 export function TodoList(){
     const [todos, setTodos] = useState([] as Todo[])
@@ -43,12 +44,3 @@ export function TodoList(){
     </div>
 }
 
-function sortTodos(todos: Todo[]){
-  todos.sort((a,b)=>{
-    const _b = /(\d+)\$/.exec(b.id);
-    const _a =/(\d+)\$/.exec(a.id);
-    if(!_b || ! _a) return 0;
-    if(_b[1] == null || _a[1] == null) return 0;
-    return Number(_b[1]) - Number(_a[1])
-  })
-}

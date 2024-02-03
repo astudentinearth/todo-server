@@ -4,6 +4,7 @@ import { getUser } from "@/lib/actions/auth.actions";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { SettingsHeader } from "../../components/SettingsHeader";
+import { DataWidget } from "@/components/settings/DataWidget";
 
 export const metadata: Metadata = {
     title: "Settings"
@@ -20,11 +21,7 @@ export default async function SettingsPage() {
                     <SettingsHeader></SettingsHeader>
                     <SecurityWidget></SecurityWidget>
                     <AccountWidget></AccountWidget>
-                    {/*<h2>Your data</h2>
-                <div className="py-2">
-                    <span className="pb-2 block">You can export your todos in a Markdown file and include them in other productivity tools you might be using.</span>
-                    <Button colors="primary" className="mr-2">Export as Markdown</Button>
-                </div>*/}
+                    <DataWidget></DataWidget>
                 </div>
             </div>
         </>
