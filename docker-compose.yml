@@ -11,8 +11,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
-    ports:
-      - "5432:5432"
 
   todoapp:
     container_name: todoapp
@@ -20,10 +18,19 @@ services:
     restart: always
     env_file:
       - .env
-    ports:
-      - "3000:3000"
     depends_on:
       - db
+
+  todoapp-nginx:
+    container_name: todoapp_nginx
+    image: nginx
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - todoapp
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
 
 volumes:
   todoapp_db:
