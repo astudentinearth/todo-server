@@ -1,6 +1,7 @@
 import { NodePostgresAdapter } from "@lucia-auth/adapter-postgresql";
 import pg from "pg";
 import { PrismaClient } from "@prisma/client"
+import * as redis from "redis";
 
 const prismaClientSingleton = ()=>{
     return new PrismaClient();
@@ -31,4 +32,10 @@ const prisma = globalThis.prisma ?? prismaClientSingleton();
 
 if(process.env.NODE_ENV !== 'production') globalThis.prisma = prisma;
 
-export {adapter, pool, prisma}
+const redisClient = redis.createClient({
+    url: process.env["REDIS_URL"]
+})
+
+redisClient.connect().then(()=>{});
+
+export {adapter, pool, prisma, redisClient}

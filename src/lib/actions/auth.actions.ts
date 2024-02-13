@@ -9,6 +9,7 @@ import { cache } from "react";
 import { UserSession } from "../types";
 import Bowser from "bowser";
 import { prisma } from "@/lib/db";
+import { loginLimiter } from "../rate-limit";
 
 // FIXME: This action requires middleware as a measure against DDOS attacks.
 // Susceptible to the creation of thousands of accounts in a matter of seconds
@@ -57,17 +58,63 @@ export async function logout(){
 export async function login(username: string, password: string): Promise<string>{
     username=username.trim();
     password = password.trim();
+
+    /// Rate limiting logic
+    const {limiterBruteForceByIP, limiterConsecutiveFailsByPair, getUsernameIPkey} = loginLimiter;
+    // Production has nginx in front, which sets X-Real-IP header. Development is not proxied, so we will just read from XFF
+    const ip = (process.env.NODE_ENV === "production" ? headers().get("X-Real-IP") : headers().get("X-Forwarded-For"));
+    if(ip==null) return "Invalid client address.";
+    const key = getUsernameIPkey(username, ip);
+    const resPair = await limiterConsecutiveFailsByPair.get(key);
+    const resIP = await limiterBruteForceByIP.get(ip);
+    let retry = 0;
+
+    if(resIP !== null && resIP.consumedPoints > loginLimiter.MAX_FAILURES_BY_IP){
+        retry = Math.round(resIP.msBeforeNext/1000) || 1;
+    } else if (resPair !== null && resPair.consumedPoints > loginLimiter.MAX_CONSECUTIVE_FAILS){
+        retry = Math.round(resPair.msBeforeNext/1000) || 1;
+    }
+
+    if (retry > 0){
+        return `Too many requests. Try again in ${retry} seconds.`
+    }
+
     if(username.length > 64 || !/^[a-zA-Z0-9_]+$/.test(username)) return "Invalid username";
     const existingUser = await prisma?.users.findUnique({where: {username}});
+    const limiterPromises = [limiterBruteForceByIP.consume(ip)];
     if(!existingUser || !existingUser.hashed_password){
+        try{
+            await Promise.all(limiterPromises);
+        }
+        catch (rejected){
+            if(rejected instanceof Error) console.log(rejected.message);
+            else{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return `Too many requests. Try again in ${(Math.round((rejected as any).msBeforeNext)/1000)}`
+            }
+        }
         return "Incorrect username or password"
     }
     const result = await bcrypt.compare(password, existingUser.hashed_password);
-    if(!result) return "Incorrect username or password";
+    if(!result){ 
+        limiterPromises.push(limiterConsecutiveFailsByPair.consume(key));
+        try{
+            await Promise.all(limiterPromises);
+        }
+        catch (rejected){
+            if(rejected instanceof Error) console.log(rejected.message);
+            else{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return `Too many requests. Try again in ${(Math.round((rejected as any).msBeforeNext)/1000)}`
+            }
+        }
+        return "Incorrect username or password";
+    }
     const ua = headers().get("User-Agent");
     const session = await lucia.createSession(existingUser.id, {userAgent: (ua ?? ""), creationTime: new Date()});
     const sessionCookie = lucia.createSessionCookie(session.id);
     cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    if(resPair !== null && resPair.consumedPoints > 0) await limiterConsecutiveFailsByPair.delete(key);
     return redirect("/");
 }
 
