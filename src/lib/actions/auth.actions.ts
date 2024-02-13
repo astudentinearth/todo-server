@@ -19,7 +19,7 @@ export async function signup(username: string, password: string) : Promise<strin
     if(!/^[a-zA-Z0-9_]+$/.test(username)){
         return "Username contains invalid characters.";
     }
-    if(username.length>32) return "Username too long. Pick one that is 32 characters at maximum.";
+    if(username.length>64) return "Username too long. Pick one that is 32 characters at maximum.";
 
     // password validation
     password = password.trim();
