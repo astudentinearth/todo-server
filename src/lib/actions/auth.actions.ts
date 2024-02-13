@@ -22,7 +22,6 @@ export async function signup(username: string, password: string) : Promise<strin
     if(username.length>64) return "Username too long. Pick one that is 32 characters at maximum.";
 
     // password validation
-    password = password.trim();
     if(password.length<8) return "Password must be at least 8 characters.";
     if(password.length>64) return "Password length should not exceed 64 characters";
     const hashed_password = await bcrypt.hash(password, 10);
@@ -57,8 +56,6 @@ export async function logout(){
 
 export async function login(username: string, password: string): Promise<string>{
     username=username.trim();
-    password = password.trim();
-
     /// Rate limiting logic
     const {limiterBruteForceByIP, limiterConsecutiveFailsByPair, getUsernameIPkey} = loginLimiter;
     // Production has nginx in front, which sets X-Real-IP header. Development is not proxied, so we will just read from XFF
@@ -139,7 +136,6 @@ export const getUser = cache(async () => {
 
 export async function ChangeUsername(newName: string, password: string){
     newName=newName.trim();
-    password = password.trim();
     const {user} = await validateRequest();
     if(!user) return "You are not logged in.";
     if(newName.length > 64) return "Username too long.";
@@ -160,8 +156,6 @@ export async function ChangeUsername(newName: string, password: string){
 }
 
 export async function ChangePassword(oldPassword: string,newPassword: string){
-    oldPassword = oldPassword.trim();
-    newPassword = newPassword.trim();
     const {user} = await validateRequest();
     if(!user) return "You are not logged in.";
     if(oldPassword.length < 8) return "Password too short";
@@ -197,7 +191,6 @@ export async function GetUserSessions(){
 export async function ForceLogout(password: string){
     const {user} = await validateRequest();
     if(!user) return [];
-    password = password.trim();
     try {
         if(!prisma) return "We can't reach our database at the moment.";
         const db_user = await prisma.users.findUniqueOrThrow({where:{id: user.id}});

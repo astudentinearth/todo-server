@@ -15,7 +15,7 @@ export function EndAllSessionsDialog(props: Omit<ModalProps, "children">){
     }, [props.visible]);
     const validate = ()=>{
         if(currentPwRef.current==null) {setFormValid(false); return;}
-        if(currentPwRef.current.value.trim().length < 8) {setFormValid(false); return}
+        if(currentPwRef.current.value.length < 8) {setFormValid(false); return}
         setFormValid(true);
     }
     const submit = async ()=>{
@@ -23,7 +23,7 @@ export function EndAllSessionsDialog(props: Omit<ModalProps, "children">){
         if(!formValid) return;
         if(currentPwRef.current==null) return;
         setWorking(true);
-        const result = await ForceLogout(currentPwRef.current.value.trim());
+        const result = await ForceLogout(currentPwRef.current.value);
         if(result != null) alert(result);
         setWorking(false);
     }

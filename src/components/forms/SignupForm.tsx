@@ -15,11 +15,11 @@ export default function SignupForm(){
     const handleClick = async ()=>{
         if(usernameRef.current==null || passwordRef.current==null || confirmPasswordRef.current==null) return;
         if(usernameRef.current.value.trim().length==0){ alert("Provide an username"); setWorking(false); return}
-        if(passwordRef.current.value.trim().length==0){ alert("Provide a password"); setWorking(false); return}
+        if(passwordRef.current.value.length==0){ alert("Provide a password"); setWorking(false); return}
         if(confirmPasswordRef.current.value!==passwordRef.current.value) {alert("Passwords don't match"); setWorking(false); return}
         setWorking(true);
         const username = usernameRef.current.value.trim();
-        const password = passwordRef.current.value.trim();
+        const password = passwordRef.current.value;
         const result = await signup(username, password);
         if(result !== "" && result != null) alert(result);
         setWorking(false);
@@ -29,7 +29,9 @@ export default function SignupForm(){
         if(usernameRef.current.value.trim().length==0){ setFormValid(false); return}
         if(usernameRef.current.value.trim().length > 64) {setFormValid(false); return}
         if(!/^[a-zA-Z0-9_]+$/.test(usernameRef.current.value)) {setFormValid(false); return}
-        if(passwordRef.current.value.trim().length==0){ setFormValid(false); return}
+        if(passwordRef.current.value.length==0){ setFormValid(false); return}
+        if(passwordRef.current.value.length<8){ setFormValid(false); return}
+        if(passwordRef.current.value.length>64){ setFormValid(false); return}
         if(confirmPasswordRef.current.value!==passwordRef.current.value) {setFormValid(false); return}
         if(confirmPasswordRef.current.value!==passwordRef.current.value) {setFormValid(false); return}
         setFormValid(true);

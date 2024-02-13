@@ -10,7 +10,6 @@ export async function DeleteAccount(password: string){
     const user = await getUser();
     if(!user) return "You are not logged in.";
     console.log(`${user.username} (id: ${user.id}) is attempting account deletion.`)
-    password = password.trim();
     if(password.length < 8) return "Invalid password.";
     try {
         if(!prisma) return "We can't reach our database at the moment.";

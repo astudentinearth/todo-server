@@ -18,7 +18,7 @@ export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
     const validate = ()=>{
         if(currentPwRef.current==null) return;
         if(newUsernameRef.current==null) return;
-        if(currentPwRef.current.value.trim().length < 8) {setFormValid(false); return}
+        if(currentPwRef.current.value.length < 8) {setFormValid(false); return}
         if(newUsernameRef.current.value.trim().length === 0) {setFormValid(false); return}
         if(newUsernameRef.current.value.trim().length > 64) {setFormValid(false); return}
         setFormValid(true);

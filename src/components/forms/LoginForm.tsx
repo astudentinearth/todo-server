@@ -14,7 +14,7 @@ export default function LoginForm(){
         if(usernameRef.current==null) return;
         if(passwordRef.current==null) return;
         if(usernameRef.current.value.trim().length==0){ alert("Provide an username"); setWorking(false); return}
-        if(passwordRef.current.value.trim().length==0){ alert("Provide a password"); setWorking(false); return}
+        if(passwordRef.current.value.length==0){ alert("Provide a password"); setWorking(false); return}
         setWorking(true);
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
@@ -27,7 +27,9 @@ export default function LoginForm(){
         if(usernameRef.current.value.trim().length==0){ setFormValid(false); return}
         if(usernameRef.current.value.trim().length > 64) {setFormValid(false); return}
         if(!/^[a-zA-Z0-9_]+$/.test(usernameRef.current.value)) {setFormValid(false); return}
-        if(passwordRef.current.value.trim().length==0){ setFormValid(false); return}
+        if(passwordRef.current.value.length==0){ setFormValid(false); return}
+        if(passwordRef.current.value.length<8){ setFormValid(false); return}
+        if(passwordRef.current.value.length>64){ setFormValid(false); return}
         setFormValid(true);
     }
     useEffect(()=>{setFormValid(false)},[]);
