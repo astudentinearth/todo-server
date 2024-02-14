@@ -29,6 +29,7 @@ PG_HOST = "127.0.0.1" # hostname for postgres
 PG_PORT = "5432" # port for database connection
 DATABASE_URL = "postgresql://user:password@localhost:5432/todoapp?schema=public" # database URL for prisma
 REDIS_URL = "redis://user:password@localhost:6379" # connection string for redis
+REDIS_PASSWORD = "password" # password for redis
 ```
 
 Make sure to protect your secrets well 😼  
@@ -41,4 +42,5 @@ You should be good to go
 
 ### Database configuration
 When using Docker compose, the database will be set up automatically for you. You don't need to touch the SQL files. 
-If you are using a different Postgres server, use `init.sql` to set up the tables and remove the `db` service if you want to.
+If you are using a different Postgres server, use `init.sql` to set up the tables and remove the `db` service if you want to.  
+If you have a Redis instance somewhere else, pass the connection URL for it.

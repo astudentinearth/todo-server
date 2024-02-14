@@ -1,5 +1,13 @@
 version: '3'
 services:
+  todoapp-redis:
+    container_name: todoapp_redis
+    image: redis
+    restart: always
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+    command: /bin/sh -c "redis-server --requirepass ${REDIS_PASSWORD}"
+
   db:
     container_name: todoapp_postgres
     image: postgres
@@ -20,6 +28,7 @@ services:
       - .env
     depends_on:
       - db
+      - todoapp-redis
 
   todoapp-nginx:
     container_name: todoapp_nginx
@@ -31,6 +40,7 @@ services:
       - todoapp
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./proxy.conf:/etc/nginx/proxy.conf
 
 volumes:
   todoapp_db:
