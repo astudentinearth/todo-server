@@ -4,7 +4,7 @@ import { redisClient } from "@/lib/db"
 /**
  * Maximum number of failed attempts per day before the IP address gets blocked for a day.
  */
-const MAX_FAILURES_BY_IP = 100;
+const MAX_FAILURES_BY_IP = 40;
 
 /**
  * Maximum number of consecutive fails by username-IP pair before 1 hour of blockage.
