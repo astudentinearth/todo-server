@@ -9,12 +9,33 @@ import { cache } from "react";
 import { UserSession } from "../types";
 import Bowser from "bowser";
 import { prisma } from "@/lib/db";
-import { loginLimiter } from "../rate-limit";
+import { loginLimiter, signupLimiter } from "../rate-limit";
 
 // FIXME: This action requires middleware as a measure against DDOS attacks.
 // Susceptible to the creation of thousands of accounts in a matter of seconds
 export async function signup(username: string, password: string) : Promise<string | never>{
     username=username.trim();
+
+    // Check for limits first
+    const ip = (process.env.NODE_ENV === "production" ? headers().get("X-Real-IP") : headers().get("X-Forwarded-For"));
+    if(ip==null) return "Invalid client address.";
+    const {limitAccountByIP, limitAttemptsByIP} = signupLimiter;
+    const resAttempts = await limitAttemptsByIP.get(ip);
+    const accountAttempts = await limitAccountByIP.get(ip);
+    if(resAttempts!==null && resAttempts.consumedPoints >= signupLimiter.MAX_ATTEMPTS_BY_IP){
+        return `You attempted to create an account too many times. You must wait ${Math.ceil(resAttempts.msBeforeNext/(1000*60))} minutes before trying again.`;
+    } else if(accountAttempts!=null && accountAttempts.consumedPoints >= signupLimiter.MAX_ACCOUNTS_BY_IP){
+        return `You have created too many accounts today. You must wait ${Math.ceil(accountAttempts.msBeforeNext / (1000*60))} minutes before trying again.`;
+    }
+    try {
+        limitAttemptsByIP.consume(ip);
+    } catch (err) {
+        if(err instanceof Error) console.log(err.message, err.stack);
+            else{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return `Too many requests. Try again in ${(Math.round((err as any).msBeforeNext)/1000)}`
+            }
+    }
     // username validation
     if(!/^[a-zA-Z0-9_]+$/.test(username)){
         return "Username contains invalid characters.";
@@ -33,6 +54,16 @@ export async function signup(username: string, password: string) : Promise<strin
                 username, hashed_password
             }
         })
+        try{
+            limitAccountByIP.consume(ip);
+        }
+        catch(err){
+            if(err instanceof Error) console.log(err.message, err.stack);
+            else{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return `Too many requests. Try again in ${(Math.round((err as any).msBeforeNext)/1000)}`
+            }
+        }
         const ua = headers().get("User-Agent");
         const session = await lucia.createSession(userId, {userAgent: (ua ?? ""), creationTime: new Date()});
         const sessionCookie = lucia.createSessionCookie(session.id);
