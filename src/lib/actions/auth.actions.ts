@@ -15,7 +15,7 @@ import { loginLimiter, signupLimiter } from "../rate-limit";
 // Susceptible to the creation of thousands of accounts in a matter of seconds
 export async function signup(username: string, password: string) : Promise<string | never>{
     username=username.trim();
-
+    if(username===password) return "Password can't be the same as username.";
     // Check for limits first
     const ip = (process.env.NODE_ENV === "production" ? headers().get("X-Real-IP") : headers().get("X-Forwarded-For"));
     if(ip==null) return "Invalid client address.";
