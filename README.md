@@ -11,6 +11,7 @@
 - [X] Account deletion
 - [X] Rate limiting with Redis
 - [X] Quick setup with Docker compose
+- [X] Dark mode
 
 ### Tech stack
 - Next.js 14

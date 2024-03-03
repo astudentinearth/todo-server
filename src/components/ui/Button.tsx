@@ -8,8 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 const ButtonStyles = {
     primary: "bg-primary border-[1px] border-primary transition-[filter,background,color,border] hover:brightness-125 text-white",
     secondary: "border-[1px] border-widget-normal transition-colors hover:bg-widget-hover hover:border-widget-hover",
-    danger: "border-[1px] border-red-500/50 hover:text-white hover:bg-red-500/50 hover:border-transparent transition-colors",
-    disabled: "bg-gray-800 transition-[filter,background,color,border] text-gray-500 border-[1px] border-gray-800"
+    danger: "border-[1px] border-danger/50 hover:text-white hover:bg-danger hover:border-transparent transition-colors",
+    disabled: "bg-widget-disabled transition-[filter,background,color,border] text-gray-500 border-[1px] border-widget-disabled"
 }
 
 export function Button(props: ButtonProps){

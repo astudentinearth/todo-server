@@ -7,8 +7,8 @@ export interface ModalProps{
 }
 
 export function ModalBase(props: ModalProps){
-    return (props.visible ? <div className="fixed left-0 right-0 flex items-center justify-center top-0 z-50 bottom-0 bg-black-2/50 backdrop-blur-sm">
-        <div className="p-4 bg-black-1 border-[1px] border-widget-normal hover:border-widget-hover drop-shadow-xl rounded-2xl min-w-[384px]">
+    return (props.visible ? <div className="fixed left-0 right-0 flex items-center justify-center top-0 z-50 bottom-0 bg-modal-2/50 backdrop-blur-sm">
+        <div className="p-4 bg-modal-1 border-[1px] border-widget-normal hover:border-widget-hover drop-shadow-xl rounded-2xl min-w-[384px]">
             {props.children}
         </div>
     </div> : <></>)

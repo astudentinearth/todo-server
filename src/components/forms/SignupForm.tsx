@@ -40,10 +40,10 @@ export default function SignupForm(){
     }
     useEffect(()=>{setFormValid(false)},[]);
     return <form>
-        <TextInput onChange={validate} required inputRef={usernameRef} className="w-full mt-4 text-lg p-2 bg-black-2" placeholder="Username"></TextInput>
-        <TextInput onChange={validate} required inputRef={passwordRef} type="password" className="w-full mt-4 text-lg p-2 bg-black-2" placeholder="Password"></TextInput>
-        <TextInput onChange={validate} required inputRef={confirmPasswordRef} type="password" className="w-full mt-4 text-lg p-2 bg-black-2" placeholder="Confirm password"></TextInput>
-        {errorMessage ? <span className=" text-[12px] text-red-500 text-ellipsis">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
+        <TextInput onChange={validate} required inputRef={usernameRef} className="w-full mt-4 text-lg p-2 bg-modal-2" placeholder="Username"></TextInput>
+        <TextInput onChange={validate} required inputRef={passwordRef} type="password" className="w-full mt-4 text-lg p-2 bg-modal-2" placeholder="Password"></TextInput>
+        <TextInput onChange={validate} required inputRef={confirmPasswordRef} type="password" className="w-full mt-4 text-lg p-2 bg-modal-2" placeholder="Confirm password"></TextInput>
+        {errorMessage ? <span className=" text-[12px] text-danger text-ellipsis">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
         <Button onClick={handleClick} type="submit" disabled={working || !formValid} className="block mt-4 text-center w-full text-lg p-2">
             {working ? <span className="text-center translate-x-[-24px]"><Image className="animate-spin inline-block" width={24} height={24} src="/loader.svg" alt="Signing in"></Image></span> : "Create account"}
         </Button>

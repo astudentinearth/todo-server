@@ -76,7 +76,7 @@ export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
             <TextInput inputRef={currentPwRef} onChange={validate} error={currentPwErr} type="password" placeholder="Current password"></TextInput>
             <TextInput inputRef={newPwRef} error={newPwErr} onChange={validate} type="password" placeholder="New password"></TextInput>
             <TextInput inputRef={confirmPwRef} onChange={validate} error={confirmPwErr} type="password" placeholder="Confirm new password"></TextInput>
-            {errorMessage ? <span className="text-base text-red-500">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
+            {errorMessage ? <span className="text-base text-danger">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
             <div className="flex flex-grow justify-stretch gap-2">
                 <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} colors="secondary">Cancel</Button>
                 <Button onClick={submit} className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?

@@ -15,11 +15,11 @@ interface TextInputProps{
 
 const InputStyles = {
     normal: "border-widget-normal hover:border-widget-hover focus:border-primary",
-    error: "border-red-500/50"
+    error: "border-danger"
 }
 
 export function TextInput(props: TextInputProps){
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {inputRef, ...attr} = props;
-    return <input ref={props.inputRef} {...attr} className={"text-base block transition-colors bg-black-1 outline-none border-[1px] p-2 rounded-lg" + " " + InputStyles[(props.error ? "error" : "normal")] + " " + (props.className ?? "")}></input>
+    return <input ref={props.inputRef} {...attr} className={"text-base block transition-colors bg-modal-1 outline-none border-[1px] p-2 rounded-lg" + " " + InputStyles[(props.error ? "error" : "normal")] + " " + (props.className ?? "")}></input>
 }

@@ -9,23 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors:{
-        "black":{
-          "1":"#101012",
-          "2":"#15161a",
-          "3":"#1F2026"
+        "modal":{
+          "1":"rgb(var(--color-bg-1) / <alpha-value>)",
+          "2":"rgb(var(--color-bg-2) / <alpha-value>)",
+          "3":"rgb(var(--color-bg-3) / <alpha-value>)"
         },
-        "primary":"#1958F0",
+        "primary":"rgb(var(--color-primary) / <alpha-value>)",
         "widget":{
-          "normal":"#25272E",
-          "hover":"#2C2D36",
-          "active":"#282930"
+          "normal":"rgb(var(--color-widget-normal) / <alpha-value>)",
+          "hover":"rgb(var(--color-widget-hover) / <alpha-value>)",
+          "active":"rgb(var(--color-widget-active) / <alpha-value>)",
+          "disabled":"rgb(var(--color-widget-disabled) / <alpha-value>)",
         },
-        "red":{
-          "light":"#FF3C3C"
-        }
+        "danger":"rgb(var(--color-danger) / <alpha-value>)",
+        "body": "rgb(var(--color-text) / <alpha-value>)"
       }
     },
   },
   plugins: [],
+  darkMode: "selector"
 }
 export default config
