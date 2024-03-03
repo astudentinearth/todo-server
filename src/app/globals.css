@@ -39,6 +39,9 @@ h1, h2, h3{
       --color-danger: 255 50 50;
       --color-text: 12 12 12;
       --color-widget-disabled: 75 85 99;
+      --color-card: 244 244 244;
+      --color-card-hover: 239 239 239;
+      --color-card-active: 236 236 236;
     }
     :root[class~="dark"]{
       --color-bg-1: 16 16 18;
@@ -51,5 +54,8 @@ h1, h2, h3{
       --color-danger: 255 60 60;
       --color-text: 255 255 255;
       --color-widget-disabled: 31 41 55;
+      --color-card: 21 22 26;
+      --color-card-hover: 31 32 38;
+      --color-card-active: 34 36 44;
     }
 }

@@ -41,10 +41,10 @@ export function TodoCard(props:TodoCardProps){
     return <div onClick={(e)=>{
         e.preventDefault();
         setEdit(true);
-        }} className={"grid h-16 bg-modal-3 hover:brightness-110 active:brightness-125 rounded-lg text-body todocard-mobile sm:todocard transition-[filter]" + (edit ? "brightness-125" : "")}>
+        }} className={"grid h-16 bg-card-normal hover:bg-card-hover active:bg-card-active rounded-lg text-body todocard-mobile sm:todocard transition-colors" + (edit ? "brightness-125" : "")}>
         <button onClick={toggleCheck} className={completed ? CHECKED_CLASSNAMES : UNCHECKED_CLASSNAMES}><i className={completed ? "bi-check-lg" : ""}></i></button>
         {edit ? <TextInput inputRef={editRef} onKeyDown={handleKeydown} onBlur={handleEditComplete} className="outline-none block w-full bg-widget-normal p-2 rounded-md"></TextInput> 
         : <span ref={textRef} className="todotext select-none w-[200px] sm:w-[400px]">{content}</span>}
-        <button onClick={handleDelete} className="hover:bg-danger rounded-full transition-colors w-8 h-8 justify-self-center"><i className="bi-x-lg"></i></button>
+        <button onClick={handleDelete} className="hover:bg-danger hover:text-white  rounded-full transition-colors w-8 h-8 justify-self-center"><i className="bi-x-lg"></i></button>
     </div>
 }

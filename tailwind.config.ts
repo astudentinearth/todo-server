@@ -22,7 +22,12 @@ const config: Config = {
           "disabled":"rgb(var(--color-widget-disabled) / <alpha-value>)",
         },
         "danger":"rgb(var(--color-danger) / <alpha-value>)",
-        "body": "rgb(var(--color-text) / <alpha-value>)"
+        "body": "rgb(var(--color-text) / <alpha-value>)",
+        "card":{
+          "normal":"rgb(var(--color-card) / <alpha-value>)",
+          "hover":"rgb(var(--color-card-hover) / <alpha-value>)",
+          "active":"rgb(var(--color-card-active) / <alpha-value>)",
+        }
       }
     },
   },
