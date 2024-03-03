@@ -9,7 +9,7 @@
 - [X] Change username and password
 - [X] Data export
 - [X] Account deletion
-- [ ] Rate limiting with Redis
+- [X] Rate limiting with Redis
 - [X] Quick setup with Docker compose
 
 ### Tech stack
