@@ -21,7 +21,7 @@ export function Header(props: { username: string; }) {
     <Button onClick={() => {
       logout();
     }} colors="danger" className="text-body flex-shrink-0 flex justify-center items-center w-10 h-10">
-      <i className="bi-box-arrow-right text-xl"></i>
+      <i className="bi-box-arrow-right text-xl translate-x-[1px]"></i>
     </Button>
   </div>;
 }
