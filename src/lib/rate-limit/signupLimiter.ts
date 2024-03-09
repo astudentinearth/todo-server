@@ -7,6 +7,7 @@ const MAX_ACCOUNTS_BY_IP: number = 5;
 /** Maximum number of signup requests a client can send every 6 hours. */
 const MAX_ATTEMPTS_BY_IP: number = 50;
 
+/** Rate limiter to throttle account creation, by IP address. */
 const limitAccountByIP = new RateLimiterRedis({
     storeClient: redisClient,
     useRedisPackage: true,
@@ -16,6 +17,7 @@ const limitAccountByIP = new RateLimiterRedis({
     blockDuration: 60 * 60 * 24
 });
 
+/** Rate limiter to stop spamming the signup form. */
 const limitAttemptsByIP = new RateLimiterRedis({
     storeClient: redisClient,
     useRedisPackage: true,

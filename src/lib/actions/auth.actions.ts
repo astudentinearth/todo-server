@@ -11,8 +11,12 @@ import Bowser from "bowser";
 import { prisma } from "@/lib/db";
 import { loginLimiter, signupLimiter } from "../rate-limit";
 
-// FIXME: This action requires middleware as a measure against DDOS attacks.
-// Susceptible to the creation of thousands of accounts in a matter of seconds
+/**
+ * Creates a new user account or returns an error if account can't be created.
+ * @param username Username for the new account
+ * @param password Password for the new account
+ * @returns `Promise<string>` on error, `Promise<never>` on success
+ */
 export async function signup(username: string, password: string) : Promise<string | never>{
     username=username.trim();
     if(username===password) return "Password can't be the same as username.";
@@ -76,6 +80,9 @@ export async function signup(username: string, password: string) : Promise<strin
     return redirect("/");
 }
 
+/**
+ * Ends the current user session.
+ */
 export async function logout(){
     const {session} = await validateRequest();
     if(!session) return "Unauthorized"
@@ -85,6 +92,12 @@ export async function logout(){
     return redirect("/login");
 }
 
+/**
+ * Creates a new session for the user, or returns an error message on fail.
+ * @param username 
+ * @param password 
+ * @returns `Promise<string>` on fail
+ */
 export async function login(username: string, password: string): Promise<string>{
     username=username.trim();
     /// Rate limiting logic
@@ -146,6 +159,10 @@ export async function login(username: string, password: string): Promise<string>
     return redirect("/");
 }
 
+/**
+ * Returns the logged in user.
+ * @returns an user if logged in, `null` if logged out
+ */
 export const getUser = cache(async () => {
     const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
     if (!sessionId) return null;
@@ -165,6 +182,11 @@ export const getUser = cache(async () => {
     return user;
 });
 
+/**
+ * Changes the username associated with an account
+ * @param newName 
+ * @param password required to authorize change of username
+ */
 export async function ChangeUsername(newName: string, password: string){
     newName=newName.trim();
     const {user} = await validateRequest();
@@ -186,6 +208,11 @@ export async function ChangeUsername(newName: string, password: string){
     }
 }
 
+/**
+ * Changes the password associated with the current logged in user
+ * @param oldPassword current password required to authorize change of password
+ * @param newPassword  
+ */
 export async function ChangePassword(oldPassword: string,newPassword: string){
     const {user} = await validateRequest();
     if(!user) return "You are not logged in.";
@@ -207,6 +234,10 @@ export async function ChangePassword(oldPassword: string,newPassword: string){
     }
 }
 
+/**
+ * Gets all active logins for the current user.
+ * @returns `UserSession[]`
+ */
 export async function GetUserSessions(){
     const {user} = await validateRequest();
     if(!user) return [];
@@ -219,6 +250,10 @@ export async function GetUserSessions(){
     })
 }
 
+/**
+ * Invalidates all sessions of the current user on all devices 
+ * @param password required to authorize security action
+ */
 export async function ForceLogout(password: string){
     const {user} = await validateRequest();
     if(!user) return [];

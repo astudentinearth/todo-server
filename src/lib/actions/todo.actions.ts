@@ -4,6 +4,10 @@ import { Todo } from "../types"
 import { validateRequest } from "../auth"
 import { prisma } from "@/lib/db";
 
+/**
+ * Loads todos of current user.
+ * @returns `Promise<Todo[]>`
+ */
 export async function GetTodos(): Promise<Todo[] | null>{
     const {user} = await validateRequest();
     if(!user) return [];
@@ -17,6 +21,10 @@ export async function GetTodos(): Promise<Todo[] | null>{
     }
 }
 
+/**
+ * Perform changes on a todo.
+ * @param todo to be updated
+ */
 export async function UpdateTodo(todo: Todo){
     const {user} = await validateRequest();
     if(!user) return [];
@@ -36,6 +44,10 @@ export async function UpdateTodo(todo: Todo){
     }
 }
 
+/**
+ * Creates a new todo
+ * @param todo contents and completion status only.
+ */
 export async function CreateTodo(todo: {content: string, completed: boolean}){
     const {user} = await validateRequest();
     if(!user) return [];
@@ -50,6 +62,10 @@ export async function CreateTodo(todo: {content: string, completed: boolean}){
     }
 }
 
+/**
+ * Deletes a todo.
+ * @param todo to be deleted.
+ */
 export async function DeleteTodo(todo: Todo){
     const {user} = await validateRequest();
     if(!user) return [];

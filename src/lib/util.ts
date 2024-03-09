@@ -1,6 +1,9 @@
 import { Todo } from "./types";
 
-
+/**
+ * Sorts todos by extracting the date portion of todo IDs
+ * @returns Todo[]
+ */
 export function sortTodos(todos: Todo[]) {
   todos.sort((a, b) => {
     const _b = /(\d+)\$/.exec(b.id)

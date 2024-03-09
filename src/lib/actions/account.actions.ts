@@ -6,6 +6,10 @@ import { getUser } from "./auth.actions";
 import { prisma } from "@/lib/db";
 import bcrypt from "bcrypt"
 
+/**
+ * Deletes an account with all data associated to it - forever.
+ * @param password User password to authorize destructive action
+ */
 export async function DeleteAccount(password: string){
     const user = await getUser();
     if(!user) return "You are not logged in.";

@@ -31,6 +31,9 @@ const limiterConsecutiveFailsByPair = new RateLimiterRedis({
     blockDuration: 60 * 60
 });
 
+/** Generates a key for username-IP address pairs. 
+ * @returns string
+*/
 const getUsernameIPkey = (username:string, ip:string) => `${username}_${ip}`;
 
 export const loginLimiter = {limiterBruteForceByIP, limiterConsecutiveFailsByPair, getUsernameIPkey, MAX_CONSECUTIVE_FAILS, MAX_FAILURES_BY_IP};
