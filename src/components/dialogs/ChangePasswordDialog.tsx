@@ -5,6 +5,7 @@ import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangePassword } from "@/lib/actions/auth.actions";
 
+/** Provides the confirmation dialog for password change. */
 export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
     // Error message to be shown at the bottom
     const [errorMessage, setErrorMessage] = useState("");

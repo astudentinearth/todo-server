@@ -12,6 +12,7 @@ const ButtonStyles = {
     disabled: "bg-widget-disabled transition-[filter,background,color,border] text-gray-500 border-[1px] border-widget-disabled"
 }
 
+/** Default button component. Supports 4 styles out of the box. */
 export function Button(props: ButtonProps){
     let classnames = "";
     if(props.colors != null){

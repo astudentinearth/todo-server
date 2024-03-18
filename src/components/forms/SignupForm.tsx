@@ -5,7 +5,7 @@ import Image from "next/image"
 import { signup } from "@/lib/actions/auth.actions";
 import { Button, TextInput } from "../ui";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/** Component for sign up UI. */
 export default function SignupForm(){
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)

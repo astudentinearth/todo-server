@@ -2,6 +2,9 @@
 
 import { useEffect } from "react"
 
+/** Provides automatic handling of color schemes. Uses system default if no user preference
+ * is present.
+ */
 export default function ThemeHelper(){
     useEffect(()=>{
         // check for user preference

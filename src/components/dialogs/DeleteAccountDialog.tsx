@@ -6,6 +6,7 @@ import { TextInput, Button } from "../ui";
 import { ModalProps, ModalBase } from "./ModalBase";
 import { DeleteAccount } from "@/lib/actions/account.actions";
 
+/** Provides the confirmation dialog for account deletion. */
 export function DeleteAccountDialog(props: Omit<ModalProps, "children">){
     const [isWorking, setWorking] = useState(false);
     const [formValid, setFormValid] = useState(false);

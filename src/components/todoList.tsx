@@ -8,6 +8,9 @@ import { CreateTodo, GetTodos } from "@/lib/actions/todo.actions"
 import { TextInput } from "./ui"
 import { sortTodos } from "@/lib/util"
 
+/**
+ * Provides the list and inputs for task management
+ */
 export function TodoList(){
     const [todos, setTodos] = useState([] as Todo[])
     const [loading, setLoading] = useState(true);

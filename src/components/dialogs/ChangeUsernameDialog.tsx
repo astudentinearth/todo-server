@@ -5,6 +5,7 @@ import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangeUsername } from "@/lib/actions/auth.actions";
 
+/** Provides the confirmation dialog for username change. */
 export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
     // State to disable the change username button until API response arrives
     const [isWorking, setWorking] = useState(false);

@@ -4,12 +4,16 @@ import { logout } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
+/**
+ * Provides navigation, theme and session controls.
+ */
 export function Header(props: { username: string; }) {
   const router = useRouter();
   const darkModeIconRef = useRef<HTMLElement>(null);
   useEffect(()=>{
     setIcon();
   });
+  // Dark mode switch event handler.
   function toggleDarkMode(){
     const root = document.querySelector(":root");
     if(!root) return;

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui";
 import { logout } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 
+/** Top level controls on the settings page. */
 export function SettingsHeader() {
     const router = useRouter();
     return <div className="flex gap-2 items-center">

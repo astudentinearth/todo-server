@@ -6,6 +6,7 @@ import { UserSession } from "@/lib/types";
 import { GetUserSessions } from "@/lib/actions/auth.actions";
 import { EndAllSessionsDialog } from "../dialogs/EndAllSessionsDialog";
 
+/** Provides a frontend for security actions. */
 export function SecurityWidget(){
     const [changePassVisible, setChangePassVisible] = useState(false);
     const [logoutVisible, setLogoutVisible] = useState(false);

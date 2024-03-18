@@ -4,6 +4,7 @@ import { Button } from "../ui";
 import { DeleteAccountDialog } from "../dialogs/DeleteAccountDialog";
 import { ChangeUsernameDialog } from "../dialogs/ChangeUsernameDialog";
 
+/** Provides the frontend for account deletion and username change actions. */
 export function AccountWidget(){
     const [deleteAccountVisible, setDeleteAccountVisible] = useState(false);
     const [changeUsernameVisible, setChangeUsernameVisible] = useState(false);

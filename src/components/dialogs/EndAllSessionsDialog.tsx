@@ -6,6 +6,7 @@ import { TextInput, Button } from "../ui";
 import { ModalProps, ModalBase } from "./ModalBase";
 import { ForceLogout } from "@/lib/actions/auth.actions";
 
+/** Provides the confirmation dialog to sign out of all sessions. */
 export function EndAllSessionsDialog(props: Omit<ModalProps, "children">){
     const [isWorking, setWorking] = useState(false);
     const [formValid, setFormValid] = useState(false);

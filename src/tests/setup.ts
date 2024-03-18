@@ -6,6 +6,7 @@ afterEach(()=>{cleanup()});
 
 beforeAll(()=>{
     // Setup mocks
+    // We aren't really testing authentication in component tests, these methods just cause errors. So let's pretend they don't exist.
     vi.mock("@/lib/actions/auth.actions", ()=>{
         return ({...vi.importActual("@/lib/actions/auth.actions"),
             logout: vi.fn(()=>{})

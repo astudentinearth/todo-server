@@ -2,6 +2,7 @@
 
 import { Button } from "../ui"
 
+/** Downloads user data from the /export route handler. */
 async function downloadData(){
     const res = await fetch("/api/export");
     const blob = await res.blob();
@@ -13,6 +14,7 @@ async function downloadData(){
     URL.revokeObjectURL(url);
 }
 
+/** Provides components to help the user download their lists. */
 export function DataWidget(){
     return <div className="border-[1px] border-widget-normal hover:border-widget-hover transition-colors p-4 rounded-2xl">
     <h2>Your data</h2>

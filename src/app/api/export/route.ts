@@ -5,6 +5,7 @@ import { sortTodos } from "@/lib/util";
 
 export const dynamic = 'force-dynamic';
 
+/** Provides an endpoint to download list data in Markdown format. */
 export async function GET(){
     const {user} = await validateRequest();
     let md = "";

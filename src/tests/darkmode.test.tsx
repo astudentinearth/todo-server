@@ -9,10 +9,10 @@ vi.mock("next/navigation", ()=> ({
 
 it("should switch to dark mode when clicked", ()=>{
     render(<Header username="test"></Header>);
-    const sw = screen.getByTestId("dark_mode_switch");
-    fireEvent.click(sw);
+    const sw = screen.getByTestId("dark_mode_switch"); // get the switch
+    fireEvent.click(sw); // click on it so we are on dark mode
     const root = document.querySelector(":root");
-    expect(root?.classList.contains("dark")).toBeTruthy();
-    fireEvent.click(sw);
-    expect(root?.classList.contains("dark")).toBeFalsy();
+    expect(root?.classList.contains("dark")).toBeTruthy(); // check if classname changed correctly
+    fireEvent.click(sw); // click again to remove the class
+    expect(root?.classList.contains("dark")).toBeFalsy(); // check if classname changed correctlys
 })

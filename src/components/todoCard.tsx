@@ -9,9 +9,11 @@ interface TodoCardProps{
     reloadFunction: ()=>void
 }
 
+// Tailwind classnames for (un)checked states
 const CHECKED_CLASSNAMES = "checkbutton transition-colors rounded-full bg-primary w-8 h-8 cursor-default";
 const UNCHECKED_CLASSNAMES = "checkbutton transition-colors rounded-full bg-widget-normal hover:bg-widget-hover active:bg-widget-active w-8 h-8 cursor-default";
 
+/** Returns a component that renders a single todo. */
 export function TodoCard(props:TodoCardProps){
     const {content, completed} = props.todo;
     const [edit, setEdit] = useState(false);

@@ -4,6 +4,11 @@ import './accountMenu.css'
 import useComponentVisible from "@/app/hooks/useComponentVisible";
 import { useRouter } from "next/navigation";
 import { getUser, logout } from "@/lib/actions/auth.actions";
+
+/**
+ * Corner menu that provides session controls.
+ * @deprecated Dropped in favor of Header.tsx
+ */
 export default function AccountMenu(){
     const [username, setUsername] = useState("");
     const router = useRouter();

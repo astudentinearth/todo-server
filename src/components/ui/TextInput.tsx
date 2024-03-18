@@ -18,6 +18,9 @@ const InputStyles = {
     error: "border-danger"
 }
 
+/**
+ * A styled input component for short, single line text.
+ */
 export function TextInput(props: TextInputProps){
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {inputRef, ...attr} = props;
