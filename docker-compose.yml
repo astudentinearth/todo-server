@@ -2,7 +2,7 @@ version: '3'
 services:
   todoapp-redis:
     container_name: todoapp_redis
-    image: redis
+    image: redis:7.2.4
     restart: always
     volumes:
       - ./redis.conf:/etc/redis/redis.conf
