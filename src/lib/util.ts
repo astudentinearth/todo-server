@@ -22,3 +22,10 @@ export function sortTodos(todos: Todo[]) {
 export function cn (...inputs: ClassValue[]){
   return twMerge(clsx(inputs));
 }
+
+/**
+ * Checks if a string is blank - if there is anything left after removing (non breaking) space characters
+ */
+export function isWhitespace(s: string){
+  return (s.replace(' ',"").replace(" ","").length) == 0;
+}

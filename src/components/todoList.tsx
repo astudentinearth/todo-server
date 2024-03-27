@@ -6,7 +6,7 @@ import { TodoCard } from "./todoCard"
 import LoadingSpinner from "./loader"
 import { CreateTodo, GetTodos } from "@/lib/actions/todo.actions"
 import { TextInput } from "./ui"
-import { sortTodos } from "@/lib/util"
+import { isWhitespace, sortTodos } from "@/lib/util"
 
 /**
  * Provides the list and inputs for task management
@@ -33,6 +33,7 @@ export function TodoList(){
     const inputKeyDown = (e: KeyboardEvent)=>{
       if(e.key=="Enter"){
         if(inputRef.current==null) return;
+        if(isWhitespace(inputRef.current.value)) return;
         CreateTodo({completed: false, content: inputRef.current.value}).then(()=>{
           if(inputRef.current!=null) inputRef.current.value="";
         }).then(()=>{load()})
