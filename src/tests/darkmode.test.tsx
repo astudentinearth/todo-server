@@ -1,5 +1,4 @@
 import {render, screen, fireEvent} from "@testing-library/react"
-import { it, expect, vi } from "vitest"
 import { Header } from "@/components/Header"
 
 // Let's ignore the router for dark mode test
