@@ -1,4 +1,6 @@
+import { cn } from "@/lib/util";
 import { ButtonHTMLAttributes } from "react";
+
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     colors?: "primary" | "secondary" | "danger",
@@ -12,13 +14,11 @@ const ButtonStyles = {
     disabled: "bg-widget-disabled transition-[filter,background,color,border] text-gray-500 border-[1px] border-widget-disabled"
 }
 
+const BaseClassnames = "p-2 text-base block select-none rounded-lg overflow-x-hidden overflow-y-hidden";
+
 /** Default button component. Supports 4 styles out of the box. */
 export function Button(props: ButtonProps){
-    let classnames = "";
-    if(props.colors != null){
-       classnames = ButtonStyles[props.colors];
-    } else classnames = ButtonStyles["primary"]
-    if(props.disabled) classnames = ButtonStyles["disabled"]
-    classnames += " " + (props.radius ?? "")
-    return <button {...props} className={"p-2 text-base block select-none rounded-lg overflow-x-hidden overflow-y-hidden" + " " + (props.className ?? "") + " " + classnames}>{props.children}</button>
+    const {colors, radius, disabled} = props;
+    const classnames = cn(BaseClassnames, (!disabled && ButtonStyles[colors ?? "primary"]), radius, disabled && ButtonStyles["disabled"], props.className);
+    return <button {...props} className={classnames}>{props.children}</button>
 }
