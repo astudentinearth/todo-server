@@ -3,6 +3,7 @@
 import { Todo } from "../types"
 import { validateRequest } from "../auth"
 import { prisma } from "@/lib/db";
+import { isWhitespace } from "../util";
 
 /**
  * Loads todos of current user.
@@ -28,6 +29,7 @@ export async function GetTodos(): Promise<Todo[] | null>{
 export async function UpdateTodo(todo: Todo){
     const {user} = await validateRequest();
     if(!user) return [];
+    if(isWhitespace(todo.content)) return;
     // Omit the ID to prevent artifical changes
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {id, ...data} = todo;
@@ -51,6 +53,7 @@ export async function UpdateTodo(todo: Todo){
 export async function CreateTodo(todo: {content: string, completed: boolean}){
     const {user} = await validateRequest();
     if(!user) return [];
+    if(isWhitespace(todo.content)) return;
     const id = `${Date.now()}$${user.id}${Math.floor(Math.random()*100)}`;
     try{
         if(!prisma) return;

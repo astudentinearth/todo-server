@@ -4,6 +4,7 @@ import "./todoCard.css"
 import { Todo } from "@/lib/types";
 import { DeleteTodo, UpdateTodo } from "@/lib/actions/todo.actions"
 import { TextInput } from "./ui";
+import { isWhitespace } from "@/lib/util";
 interface TodoCardProps{
     todo: Todo,
     reloadFunction: ()=>void
@@ -26,6 +27,10 @@ export function TodoCard(props:TodoCardProps){
     },[edit])
     const handleEditComplete = ()=>{
         if(editRef.current==null) return;
+        if(isWhitespace(editRef.current.value)){
+            editRef.current.value = content;
+            setEdit(false);
+        }
         UpdateTodo({...props.todo, content: editRef.current.value}).then(()=>{props.reloadFunction()})
         setEdit(false);
     }
