@@ -1,8 +1,8 @@
 "use client"
 import { useState } from "react";
-import { Button } from "../ui";
-import { DeleteAccountDialog } from "../dialogs/DeleteAccountDialog";
-import { ChangeUsernameDialog } from "../dialogs/ChangeUsernameDialog";
+import { Button } from "../../ui";
+import { DeleteAccountDialog } from "../../dialogs/DeleteAccountDialog";
+import { ChangeUsernameDialog } from "../../dialogs/ChangeUsernameDialog";
 
 /** Provides the frontend for account deletion and username change actions. */
 export function AccountWidget(){

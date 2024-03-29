@@ -1,10 +1,10 @@
 "use client"
 import { useEffect, useState } from "react";
-import { ChangePasswordDialog } from "../dialogs";
-import { Button } from "../ui";
+import { ChangePasswordDialog } from "../../dialogs";
+import { Button } from "../../ui";
 import { UserSession } from "@/lib/types";
 import { GetUserSessions } from "@/lib/actions/auth.actions";
-import { EndAllSessionsDialog } from "../dialogs/EndAllSessionsDialog";
+import { EndAllSessionsDialog } from "../../dialogs/EndAllSessionsDialog";
 
 /** Provides a frontend for security actions. */
 export function SecurityWidget(){

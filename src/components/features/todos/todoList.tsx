@@ -3,9 +3,9 @@
 import { Todo } from "@/lib/types"
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { TodoCard } from "./todoCard"
-import LoadingSpinner from "./loader"
+import LoadingSpinner from "../../loader"
 import { CreateTodo, GetTodos } from "@/lib/actions/todo.actions"
-import { TextInput } from "./ui"
+import { TextInput } from "../../ui"
 import { isWhitespace, sortTodos } from "@/lib/util"
 
 /**

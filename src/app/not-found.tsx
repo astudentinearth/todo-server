@@ -1,4 +1,4 @@
-import Glow from "@/components/Glow";
+import Glow from "@/components/ui/Glow";
 import { Button } from "@/components/ui";
 import Link from "next/link";
 

@@ -1,4 +1,4 @@
-import { TodoList } from "@/components/todoList";
+import { TodoList } from "@/components/features/todos/todoList";
 import { getUser } from "@/lib/actions/auth.actions";
 import { redirect } from "next/navigation";
 import { Header } from "../components/Header";

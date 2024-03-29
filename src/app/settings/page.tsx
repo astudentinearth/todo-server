@@ -1,10 +1,10 @@
 import "./settings.css"
-import { AccountWidget, SecurityWidget } from "@/components/settings";
+import { AccountWidget, SecurityWidget } from "@/components/features/settings";
 import { getUser } from "@/lib/actions/auth.actions";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { SettingsHeader } from "../../components/SettingsHeader";
-import { DataWidget } from "@/components/settings/DataWidget";
+import { DataWidget } from "@/components/features/settings/DataWidget";
 
 export const metadata: Metadata = {
     title: "Settings"

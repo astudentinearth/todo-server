@@ -3,7 +3,7 @@ import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import "./todoCard.css"
 import { Todo } from "@/lib/types";
 import { DeleteTodo, UpdateTodo } from "@/lib/actions/todo.actions"
-import { TextInput } from "./ui";
+import { TextInput } from "../../ui";
 import { isWhitespace } from "@/lib/util";
 interface TodoCardProps{
     todo: Todo,
