@@ -5,12 +5,14 @@ import LoadingSpinner from "../loader";
 import { TextInput, Button } from "../ui";
 import { ModalProps, ModalBase } from "./ModalBase";
 import { DeleteAccount } from "@/lib/actions/account.actions";
+import { useNotify } from "@/hooks/useNotify";
 
 /** Provides the confirmation dialog for account deletion. */
 export function DeleteAccountDialog(props: Omit<ModalProps, "children">){
     const [isWorking, setWorking] = useState(false);
     const [formValid, setFormValid] = useState(false);
     const currentPwRef = useRef<HTMLInputElement>(null);
+    const {notify} = useNotify();
     useEffect(()=>{
         setFormValid(false);
     }, [props.visible]);
@@ -25,7 +27,7 @@ export function DeleteAccountDialog(props: Omit<ModalProps, "children">){
         if(currentPwRef.current==null) return;
         setWorking(true);
         const result = await DeleteAccount(currentPwRef.current.value);
-        if(result != null) alert(result);
+        if(result != null) notify(result, {level: "error"});
         setWorking(false);
     }
     return <ModalBase {...props}>

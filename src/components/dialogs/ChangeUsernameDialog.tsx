@@ -4,6 +4,7 @@ import { Button, TextInput } from "../ui";
 import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangeUsername } from "@/lib/actions/auth.actions";
+import { useNotify } from "@/hooks/useNotify";
 
 /** Provides the confirmation dialog for username change. */
 export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
@@ -13,6 +14,7 @@ export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
     // Refs to the actual inputs
     const newUsernameRef = useRef<HTMLInputElement>(null);
     const currentPwRef = useRef<HTMLInputElement>(null);
+    const {notify} = useNotify();
     useEffect(()=>{
         setFormValid(false);
     }, [props.visible]);
@@ -35,8 +37,8 @@ export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
             props.setVisible(false);
             setWorking(false);
             setFormValid(false);
-            window.alert("Your username has been changed.");
-        } else alert(result);
+            notify("Your username has been changed.");
+        } else notify(result ?? "Unknown error", {level: "error"});
         setWorking(false);
     }
     return <ModalBase {...props}>

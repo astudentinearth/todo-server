@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import ThemeHelper from '@/components/ThemeHelper'
+import Providers from '@/context/Providers'
+import { ToastContainer } from '@/components/features/toasts'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className=''>
-      <body className={inter.className}>{children}</body>
+      <Providers>
+        <body className={inter.className}>
+          {children}
+          <ToastContainer></ToastContainer>
+        </body>
+      </Providers>
       <ThemeHelper></ThemeHelper>
     </html>
   )

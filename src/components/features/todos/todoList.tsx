@@ -7,6 +7,7 @@ import LoadingSpinner from "../../loader"
 import { CreateTodo, GetTodos } from "@/lib/actions/todo.actions"
 import { TextInput } from "../../ui"
 import { isWhitespace, sortTodos } from "@/lib/util"
+import { useNotify } from "@/hooks/useNotify"
 
 /**
  * Provides the list and inputs for task management
@@ -15,11 +16,12 @@ export function TodoList(){
     const [todos, setTodos] = useState([] as Todo[])
     const [loading, setLoading] = useState(true);
     const inputRef = useRef<HTMLInputElement>(null);
+    const {notify} = useNotify();
     const load = async ()=>{
         const res = await GetTodos();
         if(!res) {
           setTodos([]);
-          alert("Could not load your tasks right now.")
+          notify("Could not load your tasks right now.", {level: "error"})
           return;
         }
         sortTodos(res);

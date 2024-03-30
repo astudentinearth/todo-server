@@ -29,3 +29,7 @@ export function cn (...inputs: ClassValue[]){
 export function isWhitespace(s: string){
   return (s.replace(' ',"").replace(" ","").length) == 0;
 }
+
+export function genID(){
+  return `${Date.now()}${Math.floor(Math.random()*100)}`;
+}

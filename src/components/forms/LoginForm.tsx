@@ -4,23 +4,25 @@ import { login } from "@/lib/actions/auth.actions";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Button, TextInput } from "../ui";
+import { useNotify } from "@/hooks/useNotify";
 
 /** Component for sign in UI. */
 export default function LoginForm(){
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
+    const {notify} = useNotify();
     const [working, setWorking] = useState(false);
     const [formValid, setFormValid] = useState(false);
     const handleClick = async ()=>{
         if(usernameRef.current==null) return;
         if(passwordRef.current==null) return;
-        if(usernameRef.current.value.trim().length==0){ alert("Provide an username"); setWorking(false); return}
-        if(passwordRef.current.value.length==0){ alert("Provide a password"); setWorking(false); return}
+        if(usernameRef.current.value.trim().length==0){ notify("Provide an username", {level: "error"}); setWorking(false); return}
+        if(passwordRef.current.value.length==0){ notify("Provide a password", {level: "error"}); setWorking(false); return}
         setWorking(true);
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
         const result = await login(username, password);
-        if(result !== "" && result != null) alert(result);
+        if(result !== "" && result != null) notify(result, {level: "error", timeout: 5000});
         setWorking(false);
     }
     const validate = ()=>{

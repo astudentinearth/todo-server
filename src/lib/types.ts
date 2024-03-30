@@ -12,3 +12,13 @@ export interface UserSession{
     expire: string,
     loginTimestamp: string
 }
+
+/** Represents a toast notification. */
+export interface Toast{
+    id: string,
+    /** Time in miliseconds for the notification to disappear */
+    timeout: number, 
+    /** Type of the notification. Defines the icon shape and color. */
+    level: "error" | "info" | "warning",
+    content: string
+}

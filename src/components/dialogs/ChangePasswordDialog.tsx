@@ -4,6 +4,7 @@ import { Button, TextInput } from "../ui";
 import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangePassword } from "@/lib/actions/auth.actions";
+import { useNotify } from "@/hooks/useNotify";
 
 /** Provides the confirmation dialog for password change. */
 export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
@@ -20,6 +21,7 @@ export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
     const newPwRef = useRef<HTMLInputElement>(null);
     const currentPwRef = useRef<HTMLInputElement>(null);
     const confirmPwRef = useRef<HTMLInputElement>(null);
+    const {notify} = useNotify();
     useEffect(()=>{
         setFormValid(false);
     }, [props.visible]);
@@ -67,8 +69,8 @@ export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
             props.setVisible(false);
             setWorking(false);
             setFormValid(false);
-            window.alert("Your password has been changed.");
-        } else alert(result);
+            notify("Your password has been changed");
+        } else notify(result ?? "Unknown error", {level: "error"});
         setWorking(false);
     }
     return <ModalBase {...props}>

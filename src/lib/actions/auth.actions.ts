@@ -256,7 +256,7 @@ export async function GetUserSessions(){
  */
 export async function ForceLogout(password: string){
     const {user} = await validateRequest();
-    if(!user) return [];
+    if(!user) return "You are not logged in.";
     try {
         if(!prisma) return "We can't reach our database at the moment.";
         const db_user = await prisma.users.findUniqueOrThrow({where:{id: user.id}});

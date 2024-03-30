@@ -2,8 +2,8 @@ import Glow from "@/components/ui/Glow";
 import { Button } from "@/components/ui";
 import Link from "next/link";
 
+
 export default function NotFound(){
-    
     return <>
         <div className="bg-modal-1 w-full h-full absolute flex text-body items-center justify-center flex-col">
             <h1 className="md:text-[180px] text-[96px] block leading-[180px]">404</h1><br></br>

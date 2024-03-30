@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image"
 import { signup } from "@/lib/actions/auth.actions";
 import { Button, TextInput } from "../ui";
+import { useNotify } from "@/hooks/useNotify";
 
 /** Component for sign up UI. */
 export default function SignupForm(){
@@ -13,16 +14,17 @@ export default function SignupForm(){
     const [working, setWorking] = useState(false);
     const [formValid, setFormValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const {notify} = useNotify();
     const handleClick = async ()=>{
         if(usernameRef.current==null || passwordRef.current==null || confirmPasswordRef.current==null) return;
-        if(usernameRef.current.value.trim().length==0){ alert("Provide an username"); setWorking(false); return}
-        if(passwordRef.current.value.length==0){ alert("Provide a password"); setWorking(false); return}
-        if(confirmPasswordRef.current.value!==passwordRef.current.value) {alert("Passwords don't match"); setWorking(false); return}
+        if(usernameRef.current.value.trim().length==0){ notify("Provide an username", {level: "error"}); setWorking(false); return}
+        if(passwordRef.current.value.length==0){ notify("Provide a password", {level: "error"}); setWorking(false); return}
+        if(confirmPasswordRef.current.value!==passwordRef.current.value) {notify("Passwords don't match", {level: "error"}); setWorking(false); return}
         setWorking(true);
         const username = usernameRef.current.value.trim();
         const password = passwordRef.current.value;
         const result = await signup(username, password);
-        if(result !== "" && result != null) alert(result);
+        if(result !== "" && result != null) notify(result, {level: "error"});
         setWorking(false);
     }
     const validate = ()=>{
