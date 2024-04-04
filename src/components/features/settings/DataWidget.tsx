@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "../../ui"
+import { Button } from "../../ui/custom"
 
 /** Downloads user data from the /export route handler. */
 async function downloadData(){

@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
-import { Button, TextInput } from "../ui";
+import { Button, TextInput } from "../ui/custom";
 import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangePassword } from "@/lib/actions/auth.actions";

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "../loader";
-import { TextInput, Button } from "../ui";
+import { TextInput, Button } from "../ui/custom";
 import { ModalProps, ModalBase } from "./ModalBase";
 import { DeleteAccount } from "@/lib/actions/account.actions";
 import { useNotify } from "@/hooks/useNotify";

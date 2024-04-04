@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@/components/ui";
+import { Button } from "@/components/ui/custom";
 import { logout } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";

@@ -3,7 +3,7 @@
 import { login } from "@/lib/actions/auth.actions";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Button, TextInput } from "../ui";
+import { Button, TextInput } from "../ui/custom";
 import { useNotify } from "@/hooks/useNotify";
 
 /** Component for sign in UI. */

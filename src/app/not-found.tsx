@@ -1,5 +1,5 @@
-import Glow from "@/components/ui/Glow";
-import { Button } from "@/components/ui";
+import Glow from "@/components/ui/custom/Glow";
+import { Button } from "@/components/ui/custom";
 import Link from "next/link";
 
 

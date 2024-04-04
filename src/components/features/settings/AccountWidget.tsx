@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { Button } from "../../ui";
+import { Button } from "../../ui/custom";
 import { DeleteAccountDialog } from "../../dialogs/DeleteAccountDialog";
 import { ChangeUsernameDialog } from "../../dialogs/ChangeUsernameDialog";
 
