@@ -2,7 +2,8 @@
 export interface Todo{
     id: string,
     content: string,
-    completed: boolean
+    completed: boolean,
+    due_date?: Date | null
 }
 
 /** Represents a user session. */

@@ -33,3 +33,11 @@ export function isWhitespace(s: string){
 export function genID(){
   return `${Date.now()}${Math.floor(Math.random()*100)}`;
 }
+
+export function convertDateToValue(d: Date){
+  console.log("converting")
+  const day = `0${d.getDate()}`.slice(-2);
+  const month = `0${d.getMonth()+1}`.slice(-2);
+  console.log(`${d.getFullYear()}-${month}-${day}`)
+  return `${d.getFullYear()}-${month}-${day}`;
+}

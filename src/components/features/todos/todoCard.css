@@ -12,7 +12,7 @@
 
 .todotext{
     grid-column: 2;
-    text-overflow: ellipsis;
+    text-wrap: wrap;
     display: block;
     overflow: hidden;
 }
