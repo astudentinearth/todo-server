@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@/components/ui/custom";
+import { Button } from "@/components/ui/button";
 import { logout } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -38,17 +38,17 @@ export function Header(props: { username: string; }) {
     <div className="w-full"></div>
     <Button data-testid="dark_mode_switch" onClick={() => {
       toggleDarkMode();
-      }} colors="secondary" className="text-body flex-shrink-0 flex justify-center items-center w-10 h-10">
+      }} variant="outline" className="text-body flex-shrink-0 flex justify-center items-center" size={"icon"}>
       <i ref={darkModeIconRef} className={"text-xl "}></i>
     </Button>
     <Button onClick={() => {
       router.push("/settings");
-      }} colors="secondary" className="text-body flex-shrink-0 flex justify-center items-center w-10 h-10">
+      }} variant="outline" className="text-body flex-shrink-0 flex justify-center items-center" size={"icon"}>
       <i className="bi-gear text-xl"></i>
     </Button>
     <Button onClick={() => {
       logout();
-    }} colors="danger" className="text-body flex-shrink-0 flex justify-center items-center w-10 h-10">
+    }} variant="destructive" className="text-body flex-shrink-0 flex justify-center items-center" size={"icon"}>
       <i className="bi-box-arrow-right text-xl translate-x-[1px]"></i>
     </Button>
   </div>;

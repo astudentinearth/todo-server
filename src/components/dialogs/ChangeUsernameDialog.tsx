@@ -1,10 +1,11 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
-import { Button, TextInput } from "../ui/custom";
+import { TextInput } from "../ui/custom";
 import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangeUsername } from "@/lib/actions/auth.actions";
 import { useNotify } from "@/hooks/useNotify";
+import { Button } from "@/components/ui/button";
 
 /** Provides the confirmation dialog for username change. */
 export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
@@ -48,7 +49,7 @@ export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
             <TextInput inputRef={currentPwRef} onChange={validate} type="password" placeholder="Enter your password"></TextInput>
             <TextInput inputRef={newUsernameRef} onChange={validate} type="text" placeholder="New username"></TextInput>
             <div className="flex flex-grow justify-stretch gap-2">
-                <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} colors="secondary">Cancel</Button>
+                <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} variant="secondary">Cancel</Button>
                 <Button onClick={submit} className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?
                 <LoadingSpinner width={24} height={24}></LoadingSpinner> :
                 "Change username"}</Button>

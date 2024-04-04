@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image"
 import { signup } from "@/lib/actions/auth.actions";
-import { Button, TextInput } from "../ui/custom";
+import { TextInput } from "../ui/custom";
 import { useNotify } from "@/hooks/useNotify";
+import { Button } from "@/components/ui/button";
 
 /** Component for sign up UI. */
 export default function SignupForm(){
@@ -46,7 +47,7 @@ export default function SignupForm(){
         <TextInput onChange={validate} required inputRef={passwordRef} type="password" className="w-full mt-4 text-lg p-2 bg-modal-2" placeholder="Password"></TextInput>
         <TextInput onChange={validate} required inputRef={confirmPasswordRef} type="password" className="w-full mt-4 text-lg p-2 bg-modal-2" placeholder="Confirm password"></TextInput>
         {errorMessage ? <span className=" text-[12px] text-danger text-ellipsis">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
-        <Button onClick={handleClick} type="submit" disabled={working || !formValid} className="block mt-4 text-center w-full text-lg p-2">
+        <Button onClick={handleClick} type="submit" disabled={working || !formValid} className="block mt-4 text-center w-full text-lg p-2" size={"lg"}>
             {working ? <span className="text-center translate-x-[-24px]"><Image className="animate-spin inline-block" width={24} height={24} src="/loader.svg" alt="Signing in"></Image></span> : "Create account"}
         </Button>
     </form>

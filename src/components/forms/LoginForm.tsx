@@ -3,8 +3,9 @@
 import { login } from "@/lib/actions/auth.actions";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Button, TextInput } from "../ui/custom";
+import { TextInput } from "../ui/custom";
 import { useNotify } from "@/hooks/useNotify";
+import { Button } from "@/components/ui/button";
 
 /** Component for sign in UI. */
 export default function LoginForm(){
@@ -39,7 +40,7 @@ export default function LoginForm(){
     return <form>
         <TextInput onChange={validate} required inputRef={usernameRef} className="w-full mt-4 text-lg p-2 bg-modal-2" placeholder="Username"></TextInput>
         <TextInput onChange={validate} required inputRef={passwordRef} type="password" className="w-full mt-4 text-lg p-2 bg-modal-2" placeholder="Password"></TextInput>
-        <Button onClick={handleClick} type="submit" disabled={working || !formValid} className="block mt-4 text-center w-full text-lg p-2">
+        <Button onClick={handleClick} type="submit" disabled={working || !formValid} className="block mt-4 text-center w-full text-lg" size={"lg"}>
             {working ? <span className="text-center translate-x-[-24px]"><Image className="animate-spin inline-block" width={24} height={24} src="/loader.svg" alt="Signing in"></Image></span> : "Sign in"}
         </Button>
     </form>

@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "../loader";
-import { TextInput, Button } from "../ui/custom";
+import { TextInput } from "../ui/custom";
 import { ModalProps, ModalBase } from "./ModalBase";
 import { DeleteAccount } from "@/lib/actions/account.actions";
 import { useNotify } from "@/hooks/useNotify";
+import { Button } from "@/components/ui/button";
 
 /** Provides the confirmation dialog for account deletion. */
 export function DeleteAccountDialog(props: Omit<ModalProps, "children">){
@@ -37,8 +38,8 @@ export function DeleteAccountDialog(props: Omit<ModalProps, "children">){
         <span className="block">Enter your current password to verify it&apos;s you.</span>
         <TextInput inputRef={currentPwRef} onChange={validate} type="password" placeholder="Enter your password"></TextInput>
         <div className="flex flex-grow justify-stretch gap-2">
-            <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} colors="secondary">Cancel</Button>
-            <Button onClick={submit} colors="danger" className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?
+            <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} variant="secondary">Cancel</Button>
+            <Button onClick={submit} variant="destructive" className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?
             <LoadingSpinner width={24} height={24}></LoadingSpinner> :
             "Delete my account"}</Button>
         </div>

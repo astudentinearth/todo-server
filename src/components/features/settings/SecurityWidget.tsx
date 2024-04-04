@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import { ChangePasswordDialog } from "../../dialogs";
-import { Button } from "../../ui/custom";
+import { Button } from "@/components/ui/button";
 import { UserSession } from "@/lib/types";
 import { GetUserSessions } from "@/lib/actions/auth.actions";
 import { EndAllSessionsDialog } from "../../dialogs/EndAllSessionsDialog";
@@ -28,8 +28,8 @@ export function SecurityWidget(){
                 <Button onClick={(event)=>{
                     (event.target as HTMLElement)?.blur();
                     setChangePassVisible(true);
-                    }} colors="primary" className="mr-2">Change password</Button>
-                <Button colors="danger" className="mr-2" onClick={(event)=>{
+                    }} variant={"default"} className="mr-2">Change password</Button>
+                <Button variant={"destructive"} className="mr-2" onClick={(event)=>{
                     (event.target as HTMLElement)?.blur();
                     setLogoutVisible(true);
                     }}>Logout from all devices</Button>

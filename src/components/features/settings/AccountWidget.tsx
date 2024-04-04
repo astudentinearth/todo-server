@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { Button } from "../../ui/custom";
+import { Button } from "@/components/ui/button";
 import { DeleteAccountDialog } from "../../dialogs/DeleteAccountDialog";
 import { ChangeUsernameDialog } from "../../dialogs/ChangeUsernameDialog";
 
@@ -15,11 +15,11 @@ export function AccountWidget(){
         <div className="">
             <span className="pb-2 block select-none">You can change your username or delete your account. <strong>Account deletion is not a reversible action.</strong></span>
             <div className="flex">
-                <Button colors="primary" onClick={(event)=>{
+                <Button onClick={(event)=>{
                     (event.target as HTMLElement)?.blur();
                     setChangeUsernameVisible(true);
                     }} className="mr-2">Change username</Button>
-                <Button colors="danger" onClick={(event)=>{
+                <Button variant="destructive" onClick={(event)=>{
                     (event.target as HTMLElement)?.blur();
                     setDeleteAccountVisible(true);
                     }} className="mr-2">Delete account</Button>

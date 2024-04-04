@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
-import { Button, TextInput } from "../ui/custom";
+import { TextInput } from "../ui/custom";
+import { Button } from "@/components/ui/button";
 import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangePassword } from "@/lib/actions/auth.actions";
@@ -81,7 +82,7 @@ export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
             <TextInput inputRef={confirmPwRef} onChange={validate} error={confirmPwErr} type="password" placeholder="Confirm new password"></TextInput>
             {errorMessage ? <span className="text-base text-danger">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
             <div className="flex flex-grow justify-stretch gap-2">
-                <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} colors="secondary">Cancel</Button>
+                <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} variant="secondary">Cancel</Button>
                 <Button onClick={submit} className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?
                 <LoadingSpinner width={24} height={24}></LoadingSpinner> :
                 "Change password"}</Button>
