@@ -15,6 +15,52 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+          text: "hsl(var(--primary-text))"
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        view: {
+          "1": "hsl(var(--view-1))",
+          "2": "hsl(var(--view-2))"
+        },
+        disabled: "hsl(var(--disabled))"
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -29,27 +75,6 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      colors:{
-        "modal":{
-          "1":"rgb(var(--color-bg-1) / <alpha-value>)",
-          "2":"rgb(var(--color-bg-2) / <alpha-value>)",
-          "3":"rgb(var(--color-bg-3) / <alpha-value>)"
-        },
-        "primary":"rgb(var(--color-primary) / <alpha-value>)",
-        "widget":{
-          "normal":"rgb(var(--color-widget-normal) / <alpha-value>)",
-          "hover":"rgb(var(--color-widget-hover) / <alpha-value>)",
-          "active":"rgb(var(--color-widget-active) / <alpha-value>)",
-          "disabled":"rgb(var(--color-widget-disabled) / <alpha-value>)",
-        },
-        "danger":"rgb(var(--color-danger) / <alpha-value>)",
-        "body": "rgb(var(--color-text) / <alpha-value>)",
-        "card":{
-          "normal":"rgb(var(--color-card) / <alpha-value>)",
-          "hover":"rgb(var(--color-card-hover) / <alpha-value>)",
-          "active":"rgb(var(--color-card-active) / <alpha-value>)",
-        }
-      }
     },
   },
   plugins: [require("tailwindcss-animate")],

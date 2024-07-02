@@ -8,7 +8,7 @@ import { ChangeUsernameDialog } from "../../dialogs/ChangeUsernameDialog";
 export function AccountWidget(){
     const [deleteAccountVisible, setDeleteAccountVisible] = useState(false);
     const [changeUsernameVisible, setChangeUsernameVisible] = useState(false);
-    return <div className="border-[1px] border-widget-normal hover:border-widget-hover transition-colors p-4 rounded-2xl">
+    return <div className="border-[1px] border-border hover:border-widget-hover transition-colors p-4 rounded-2xl">
         <DeleteAccountDialog visible={deleteAccountVisible} setVisible={setDeleteAccountVisible}></DeleteAccountDialog>
         <ChangeUsernameDialog visible={changeUsernameVisible} setVisible={setChangeUsernameVisible}></ChangeUsernameDialog>
         <h2>Account</h2>

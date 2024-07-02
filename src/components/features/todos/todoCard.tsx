@@ -11,8 +11,8 @@ interface TodoCardProps{
 }
 
 // Tailwind classnames for (un)checked states
-const CHECKED_CLASSNAMES = "checkbutton transition-colors rounded-full bg-primary w-8 h-8 cursor-default border-widget-normal";
-const UNCHECKED_CLASSNAMES = "checkbutton transition-colors rounded-full bg-widget-normal active:bg-widget-active w-8 h-8 cursor-default border-widget-normal border-2 hover:border-widget-hover";
+const CHECKED_CLASSNAMES = "checkbutton transition-colors rounded-full bg-primary w-8 h-8 cursor-default";
+const UNCHECKED_CLASSNAMES = "checkbutton transition-colors rounded-full bg-secondary active:bg-widget-active w-8 h-8 cursor-default";
 
 /** Returns a component that renders a single todo. */
 export function TodoCard(props:TodoCardProps){
@@ -74,13 +74,13 @@ export function TodoCard(props:TodoCardProps){
     return <div ref={cardRef} onClick={(e)=>{
     e.preventDefault();
     setEdit(true);
-    }} className={"grid min-h-16 bg-card-normal hover:bg-card-hover active:bg-card-active rounded-lg text-body todocard-mobile sm:todocard transition-colors" + (edit ? "brightness-125" : "")}>
+    }} className={"grid min-h-16 bg-card hover:bg-muted rounded-lg text-foreground todocard-mobile sm:todocard transition-colors" + (edit ? "brightness-125" : "")}>
         <button onClick={toggleCheck} className={cn(completed && CHECKED_CLASSNAMES, !completed && UNCHECKED_CLASSNAMES, (due_date!=null || edit) && "row-span-2")}><i className={completed ? "bi-check-lg text-white" : ""}></i></button>
         {edit ? <textarea ref={editRef} onKeyDown={handleKeydown}
-        className="outline-none resize-none block w-full bg-widget-normal p-2 my-4 h-10 rounded-md border-widget-normal hover:border-widget-hover border-[1px] focus:border-primary"
+        className="outline-none resize-none block w-full bg-secondary p-2 my-4 h-10 rounded-md border-border hover:border-widget-hover border-[1px] focus:border-primary"
         onInput={adjustHeight}></textarea> 
         : <span ref={textRef} className={cn("todotext select-none p-2 w-[200px] sm:w-[400px]", (due_date!=null || edit) && "mt-2")}>{content}</span>}
-        <button onClick={handleDelete} className="hover:bg-danger hover:text-white  rounded-full transition-colors w-8 h-8 justify-self-center"><i className="bi-x-lg"></i></button>
+        <button onClick={handleDelete} className="hover:bg-destructive hover:text-white  rounded-full transition-colors w-8 h-8 justify-self-center"><i className="bi-x-lg"></i></button>
         {(due_date == null && !edit) ? <></> :
         <div className={cn( "col-start-2 mb-2 ml-2")}>
             <label>Due date:</label>

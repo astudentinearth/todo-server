@@ -19,13 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className=''>
-      <Providers>
         <body className={inter.className}>
-          {children}
-          <ToastContainer></ToastContainer>
+          <Providers>
+            {children}
+            <ToastContainer></ToastContainer>
+          </Providers>
         </body>
-      </Providers>
-      <ThemeHelper></ThemeHelper>
     </html>
   )
 }

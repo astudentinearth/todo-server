@@ -2,13 +2,15 @@
 import { useEffect, useRef, useState } from "react";
 import { TextInput } from "../ui/custom";
 import { Button } from "@/components/ui/button";
-import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangePassword } from "@/lib/actions/auth.actions";
 import { useNotify } from "@/hooks/useNotify";
+import { AlertDialog,
+    AlertDialogAction, AlertDialogCancel, AlertDialogDescription, AlertDialogHeader, AlertDialogContent, AlertDialogTitle, AlertDialogTrigger, AlertDialogFooter
+ } from "@/components/ui/alert-dialog"
 
 /** Provides the confirmation dialog for password change. */
-export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
+export function ChangePasswordDialog(){
     // Error message to be shown at the bottom
     const [errorMessage, setErrorMessage] = useState("");
     // Invalid states
@@ -25,7 +27,7 @@ export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
     const {notify} = useNotify();
     useEffect(()=>{
         setFormValid(false);
-    }, [props.visible]);
+    }, []);
     const validate = ()=>{
         if(currentPwRef.current==null) return;
         if(newPwRef.current==null) return;
@@ -67,26 +69,34 @@ export function ChangePasswordDialog(props: Omit<ModalProps, "children">){
         setWorking(true);
         const result = await ChangePassword(currentPwRef.current.value, newPwRef.current.value);
         if(result===true) {
-            props.setVisible(false);
             setWorking(false);
             setFormValid(false);
             notify("Your password has been changed");
         } else notify(result ?? "Unknown error", {level: "error"});
         setWorking(false);
     }
-    return <ModalBase {...props}>
-        <div className="flex flex-col gap-4">
-            <h2>Change password</h2>
-            <TextInput inputRef={currentPwRef} onChange={validate} error={currentPwErr} type="password" placeholder="Current password"></TextInput>
-            <TextInput inputRef={newPwRef} error={newPwErr} onChange={validate} type="password" placeholder="New password"></TextInput>
-            <TextInput inputRef={confirmPwRef} onChange={validate} error={confirmPwErr} type="password" placeholder="Confirm new password"></TextInput>
-            {errorMessage ? <span className="text-base text-danger">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
-            <div className="flex flex-grow justify-stretch gap-2">
-                <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} variant="secondary">Cancel</Button>
-                <Button onClick={submit} className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?
-                <LoadingSpinner width={24} height={24}></LoadingSpinner> :
-                "Change password"}</Button>
-            </div>
-        </div>
-    </ModalBase>
+    return <AlertDialog>
+        <AlertDialogTrigger asChild>
+            <Button variant={"default"} className="mr-2">Change password</Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent className="border-border p-4 max-w-[400px]">
+            <AlertDialogHeader>
+                <AlertDialogTitle>Change password</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogDescription className="flex flex-col gap-2">
+                <TextInput inputRef={currentPwRef} onChange={validate} error={currentPwErr} type="password" placeholder="Current password"></TextInput>
+                <TextInput inputRef={newPwRef} error={newPwErr} onChange={validate} type="password" placeholder="New password"></TextInput>
+                <TextInput inputRef={confirmPwRef} onChange={validate} error={confirmPwErr} type="password" placeholder="Confirm new password"></TextInput>
+                {errorMessage ? <span className="text-base text-destructive">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
+            </AlertDialogDescription>
+            <AlertDialogFooter className="">
+                <AlertDialogCancel disabled={isWorking} className="flex-shrink-0">
+                    Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction onClick={submit} disabled={isWorking || !formValid} className="flex flex-shrink-0 justify-center items-center">
+                    {isWorking ? <LoadingSpinner width={24} height={24}></LoadingSpinner> : "Change password"}
+                </AlertDialogAction>
+            </AlertDialogFooter>
+       </AlertDialogContent>
+    </AlertDialog>
 }

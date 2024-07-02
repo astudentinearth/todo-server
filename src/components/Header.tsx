@@ -1,6 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { logout } from "@/lib/actions/auth.actions";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -9,22 +10,15 @@ import { useEffect, useRef } from "react";
  */
 export function Header(props: { username: string; }) {
   const router = useRouter();
+  const {setTheme, theme} = useTheme();
   const darkModeIconRef = useRef<HTMLElement>(null);
   useEffect(()=>{
     setIcon();
   });
   // Dark mode switch event handler.
   function toggleDarkMode(){
-    const root = document.querySelector(":root");
-    if(!root) return;
-    if(root.classList.contains("dark")){
-        localStorage.setItem("theme", "light");
-        root.classList.remove("dark");
-    }
-    else{
-      localStorage.setItem("theme", "dark");
-      root.classList.add("dark");
-    }
+    if(theme==="dark") setTheme("light");
+    else setTheme("dark");
     setIcon();
   }
   const setIcon = ()=>{
@@ -34,21 +28,21 @@ export function Header(props: { username: string; }) {
     darkModeIconRef.current?.classList.add(cl);
   }
   return <div className="flex justify-start w-full sm:w-[608px] transition-[margin] gap-2 px-4  mt-4 sm:p-0 flex-grow-0">
-    <span className="text-body text-2xl flex-shrink-0 block">{props.username}&apos;s list</span>
+    <span className="text-foreground text-2xl flex-shrink-0 block">{props.username}&apos;s list</span>
     <div className="w-full"></div>
     <Button data-testid="dark_mode_switch" onClick={() => {
       toggleDarkMode();
-      }} variant="outline" className="text-body flex-shrink-0 flex justify-center items-center" size={"icon"}>
+      }} variant="outline" className="text-foreground flex-shrink-0 flex justify-center items-center" size={"icon"}>
       <i ref={darkModeIconRef} className={"text-xl "}></i>
     </Button>
     <Button onClick={() => {
       router.push("/settings");
-      }} variant="outline" className="text-body flex-shrink-0 flex justify-center items-center" size={"icon"}>
+      }} variant="outline" className="text-foreground flex-shrink-0 flex justify-center items-center" size={"icon"}>
       <i className="bi-gear text-xl"></i>
     </Button>
     <Button onClick={() => {
       logout();
-    }} variant="destructive" className="text-body flex-shrink-0 flex justify-center items-center" size={"icon"}>
+    }} variant="destructive" className="text-foreground flex-shrink-0 flex justify-center items-center" size={"icon"}>
       <i className="bi-box-arrow-right text-xl translate-x-[1px]"></i>
     </Button>
   </div>;

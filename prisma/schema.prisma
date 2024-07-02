@@ -8,7 +8,7 @@ datasource db {
 }
 
 model todos {
-  id        String    @id @unique @default(dbgenerated("nextval('todos_id_seq'::regclass)"))
+  id        String    @id @unique
   userID    String
   content   String?   @db.VarChar(255)
   completed Boolean?
@@ -16,7 +16,7 @@ model todos {
 }
 
 model users {
-  id              String          @id @default(dbgenerated("nextval('users_id_seq'::regclass)"))
+  id              String          @id
   username        String          @unique @db.VarChar(32)
   hashed_password String?
   user_sessions   user_sessions[]
@@ -29,12 +29,4 @@ model user_sessions {
   userAgent    String?
   creationTime DateTime? @db.Timestamptz(6)
   users        users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model sessions {
-  sid    String   @id(map: "session_pkey") @db.VarChar
-  sess   Json     @db.Json
-  expire DateTime @db.Timestamp(6)
-
-  @@index([expire], map: "IDX_session_expire")
 }

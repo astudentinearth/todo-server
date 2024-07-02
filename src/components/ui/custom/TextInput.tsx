@@ -15,11 +15,11 @@ interface TextInputProps{
 }
 
 const InputStyles = {
-    normal: "border-widget-normal hover:border-widget-hover focus:border-primary",
-    error: "border-danger"
+    normal: "border-border hover:border-widget-hover focus:border-primary",
+    error: "border-destructive"
 }
 
-const BaseClassnames = "text-base block transition-colors bg-modal-1 outline-none border-[1px] p-2 rounded-lg";
+const BaseClassnames = "text-base block transition-colors bg-background outline-none border-[1px] p-2 rounded-lg";
 
 /**
  * A styled input component for short, single line text.

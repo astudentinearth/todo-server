@@ -18,17 +18,14 @@ export function SecurityWidget(){
             else setSessions(sess);
         })();
     }, []);
-    return <div className="border-[1px] border-widget-normal hover:border-widget-hover transition-colors p-4 rounded-2xl">
-        <ChangePasswordDialog visible={changePassVisible} setVisible={setChangePassVisible}></ChangePasswordDialog>
+    return <div className="border-[1px] border-border hover:border-widget-hover transition-colors p-4 rounded-2xl">
+        
         <EndAllSessionsDialog visible={logoutVisible} setVisible={setLogoutVisible}></EndAllSessionsDialog>
         <h2>Security</h2>
         <div className="">
             <span className="pb-2 block select-none">You can change your password and logout from other devices.</span>
             <div className="flex">
-                <Button onClick={(event)=>{
-                    (event.target as HTMLElement)?.blur();
-                    setChangePassVisible(true);
-                    }} variant={"default"} className="mr-2">Change password</Button>
+                <ChangePasswordDialog></ChangePasswordDialog>
                 <Button variant={"destructive"} className="mr-2" onClick={(event)=>{
                     (event.target as HTMLElement)?.blur();
                     setLogoutVisible(true);

@@ -16,7 +16,7 @@ export default async function SettingsPage() {
     if (!user) redirect("/login");
     return (
         <>
-            <div className="text-body sm:flex sm:flex-col sm:items-center">
+            <div className="text-foreground sm:flex sm:flex-col sm:items-center">
                 <div className="sm:w-[620px] lg:w-[800px] transition-[width] p-4 w-full flex flex-col gap-3 flex-grow ">
                     <SettingsHeader></SettingsHeader>
                     <SecurityWidget></SecurityWidget>

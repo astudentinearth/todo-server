@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS "todos" (
     "userID" TEXT NOT NULL,
     "content" VARCHAR(255),
     "completed" BOOLEAN,
-    "due_date" TIMESTAMPTZ(6) NOT NULL,
+    "due_date" TIMESTAMPTZ(6),
     CONSTRAINT "todos_pkey" PRIMARY KEY ("id")
 );
 

@@ -11,7 +11,7 @@ import { useContext } from "react"
  */
 export function ToastContainer(){
     const {notifications} = useContext(ToastsContext)
-    return <div className="flex flex-col gap-2 text-body mb-2 z-[90] px-2 w-full sm:w-96 absolute left-[50%] translate-x-[-50%] bottom-0 bg-transparent">
+    return <div className="flex flex-col gap-2 text-foreground mb-2 z-[90] px-2 w-full sm:w-96 absolute left-[50%] translate-x-[-50%] bottom-0 bg-transparent">
         {notifications.slice(0,5).map((t, i)=><ToastComponent key={i} toast={t}></ToastComponent>)}
     </div>
 }
@@ -23,12 +23,12 @@ function ToastComponent(props: {toast: Toast}){
     const icon = cn(
         level==="info" && "bi-info",
         level==="warning" && "bi-exclamation-triangle-fill text-yellow-500",
-        level==="error" && "bi-x-circle-fill text-danger",
+        level==="error" && "bi-x-circle-fill text-destructive",
         "w-6"
     )
     const container = cn(
-        "transition-[background-color,color,filter,border] select-none hover:border-widget-hover items-center border-widget-normal border-2",
-        "p-2 bg-modal-3 rounded-lg  text-xl flex gap-2 drop-shadow-sm")
+        "transition-[background-color,color,filter,border] select-none hover:border-widget-hover items-center border-border border-2",
+        "p-2 bg-view-2 rounded-lg  text-xl flex gap-2 drop-shadow-sm")
     return <div onClick={()=>{dismiss(id)}} onContextMenu={(e)=>{
         e.preventDefault();
         e.stopPropagation();

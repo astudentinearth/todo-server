@@ -16,7 +16,7 @@ async function downloadData(){
 
 /** Provides components to help the user download their lists. */
 export function DataWidget(){
-    return <div className="border-[1px] border-widget-normal hover:border-widget-hover transition-colors p-4 rounded-2xl">
+    return <div className="border-[1px] border-border hover:border-widget-hover transition-colors p-4 rounded-2xl">
     <h2>Your data</h2>
     <span className="pb-2 block select-none">Export your todos in a Markdown file.</span>
     <Button onClick={downloadData}>Export data</Button>

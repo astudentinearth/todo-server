@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background: rgb(var(--color-bg-1));
-    @apply transition-[background];
-  }
+
   
   h1{
     @apply font-bold text-3xl;
@@ -28,34 +25,83 @@ body {
   }
   
   @layer base{
-      :root{
-        --color-bg-1: 252 252 252;
-        --color-bg-2: 244 244 244;
-        --color-bg-3: 236 236 236;
-        --color-primary: 25 88 240;
-        --color-widget-normal: 228 228 228;
-        --color-widget-hover: 212 212 212;
-        --color-widget-active: 240 240 240;
-        --color-danger: 255 50 50;
-        --color-text: 12 12 12;
-        --color-widget-disabled: 75 85 99;
-        --color-card: 244 244 244;
-        --color-card-hover: 239 239 239;
-        --color-card-active: 236 236 236;
-      }
-      :root[class~="dark"]{
-        --color-bg-1: 16 16 18;
-        --color-bg-2: 21 22 26;
-        --color-bg-3: 31 32 38;
-        --color-primary: 25 88 240;
-        --color-widget-normal: 37 39 46;
-        --color-widget-hover: 44 45 54;
-        --color-widget-active: 40 41 48;
-        --color-danger: 255 60 60;
-        --color-text: 255 255 255;
-        --color-widget-disabled: 31 41 55;
-        --color-card: 21 22 26;
-        --color-card-hover: 31 32 38;
-        --color-card-active: 34 36 44;
-      }
+    :root{
+      --background: 0 0% 99%;
+      --foreground: 0 0% 0%;
+
+      --view-1: 0 0% 96%;
+      --view-2: 0 0% 93%;
+
+      --card: 0 0% 90%;
+      --card-foreground: 0 0% 0%;
+
+      --popover: 0 0% 9%;
+      --popover-foreground: 0 0% 0%;
+
+      --primary: 222 88% 52%;
+      --primary-foreground: 0 0% 100%;
+      --primary-text: 242 58% 62%;
+
+      --secondary: 0 0% 83%;
+      --secondary-foreground: 0 0% 0%;
+
+      --muted: 0 0% 89%;
+      --muted-foreground: 0 0% 0%;
+
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+
+      --destructive: 0 51% 55%;
+      --destructive-foreground: 210 40% 98%;
+
+      --disabled: 0 0% 22%;
+
+      --border: 0 0% 75%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: 0 0% 2%;
+      --foreground: 0 0% 100%;
+
+      --view-1: 0 0% 4%;
+      --view-2: 0 0% 7%;
+
+      --card: 0 0% 10%;
+      --card-foreground: 0 0% 94%;
+
+      --popover: 0 0% 9%;
+      --popover-foreground: 0 0% 94%;
+
+      --primary: 222 88% 52%;
+      --primary-foreground: 0 0% 100%;
+      --primary-text: 242 58% 62%;
+
+      --secondary: 0 0% 20%;
+      --secondary-foreground: 0 0% 100%;
+
+      --muted: 0 0% 14%;
+      --muted-foreground: 0 0% 89%;
+
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+
+      --destructive: 0 51% 55%;
+      --destructive-foreground: 210 40% 98%;
+
+      --disabled: 0 0% 22%;
+
+      --border: 0 0% 40%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+
+      --radius: 0.5rem;
+    }
+
+    body {
+      @apply transition-[background] bg-background;
+    }
   }
