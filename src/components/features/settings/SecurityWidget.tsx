@@ -28,7 +28,7 @@ export function SecurityWidget(){
         <div className="h-4"></div>
         <h3>Active sessions</h3>
         <div className="flex flex-col w-full overflow-x-scroll">
-            <table className="border-spacing-y-4 min-w-[540px] text-base divide-y-2 divide-border overflow-x-auto w-full">
+            <table className="border-spacing-y-4 min-w-[540px] text-base divide-y divide-border overflow-x-auto w-full">
                 <thead className="h-12 text-left">
                     <tr>
                         <th>Index</th>
@@ -38,7 +38,7 @@ export function SecurityWidget(){
                         <th>Valid since</th>
                     </tr>
                 </thead>
-                <tbody className="divide-border divide-y-2">
+                <tbody className="divide-border divide-y">
                     {sessions.map((s, i)=>
                         <tr key={i} className="h-12">
                             <td>{i}</td>
