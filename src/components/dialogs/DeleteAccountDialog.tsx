@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "../loader";
 import { TextInput } from "../ui/custom";
-import { ModalProps, ModalBase } from "./ModalBase";
 import { DeleteAccount } from "@/lib/actions/account.actions";
 import { useNotify } from "@/hooks/useNotify";
 import { Button } from "@/components/ui/button";

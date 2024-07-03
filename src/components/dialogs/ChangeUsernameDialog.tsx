@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
 import { TextInput } from "../ui/custom";
-import { ModalProps, ModalBase } from "./ModalBase";
 import LoadingSpinner from "../loader";
 import { ChangeUsername } from "@/lib/actions/auth.actions";
 import { useNotify } from "@/hooks/useNotify";
@@ -36,7 +35,6 @@ export function ChangeUsernameDialog(){
         setWorking(true);
         const result = await ChangeUsername(newUsernameRef.current.value, currentPwRef.current.value);
         if(result==null) {
-            props.setVisible(false);
             setWorking(false);
             setFormValid(false);
             notify("Your username has been changed.");

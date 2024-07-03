@@ -1,2 +1,4 @@
 {
+    "eslint.workingDirectories": ["./src"],
+    "eslint.lintTask.enable": true
 }

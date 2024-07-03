@@ -1,6 +1,4 @@
 "use client"
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { DeleteAccountDialog } from "../../dialogs/DeleteAccountDialog";
 import { ChangeUsernameDialog } from "../../dialogs/ChangeUsernameDialog";
 

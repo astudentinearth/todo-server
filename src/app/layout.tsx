@@ -2,7 +2,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import ThemeHelper from '@/components/ThemeHelper'
 import Providers from '@/context/Providers'
 import { ToastContainer } from '@/components/features/toasts'
 

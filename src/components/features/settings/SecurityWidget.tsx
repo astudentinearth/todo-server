@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
 import { ChangePasswordDialog } from "../../dialogs";
-import { Button } from "@/components/ui/button";
 import { UserSession } from "@/lib/types";
 import { GetUserSessions } from "@/lib/actions/auth.actions";
 import { EndAllSessionsDialog } from "../../dialogs/EndAllSessionsDialog";

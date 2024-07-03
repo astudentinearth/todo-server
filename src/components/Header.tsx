@@ -1,9 +1,9 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { logout } from "@/lib/actions/auth.actions";
+import { LogOut, Moon, Settings, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
-import { Moon, Sun, Settings, LogOut } from "lucide-react";
 
 /**
  * Provides navigation, theme and session controls.
