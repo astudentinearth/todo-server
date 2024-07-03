@@ -69,16 +69,17 @@ export function TodoCard(props:TodoCardProps){
     };
     const adjustHeight = ()=>{
         if(!editRef.current) return;
-        editRef.current.style.height= `${editRef.current.scrollHeight+4}px`;
+        editRef.current.style.height= `auto`;
+        editRef.current.style.height= `${editRef.current.scrollHeight+2}px`;
     }
     return <div ref={cardRef} onClick={(e)=>{
     e.preventDefault();
     setEdit(true);
     }} className={"grid min-h-16 bg-card hover:bg-muted rounded-lg text-foreground todocard-mobile sm:todocard transition-colors" + (edit ? "brightness-125" : "")}>
         <button onClick={toggleCheck} className={cn(completed && CHECKED_CLASSNAMES, !completed && UNCHECKED_CLASSNAMES, (due_date!=null || edit) && "row-span-2")}><i className={completed ? "bi-check-lg text-white" : ""}></i></button>
-        {edit ? <textarea ref={editRef} onKeyDown={handleKeydown}
-        className="outline-none resize-none block w-full bg-secondary p-2 my-4 h-10 rounded-md border-border hover:border-widget-hover border-[1px] focus:border-primary"
-        onInput={adjustHeight}></textarea> 
+        {edit ? <textarea ref={editRef} onKeyDown={handleKeydown} rows={1}
+        className="outline-none resize-none block w-full bg-secondary p-2 my-4 h-10 overflow-hidden rounded-lg border-border hover:border-widget-hover border-[1px] focus:border-primary"
+        onChange={adjustHeight}></textarea> 
         : <span ref={textRef} className={cn("todotext select-none p-2 w-[200px] sm:w-[400px]", (due_date!=null || edit) && "mt-2")}>{content}</span>}
         <button onClick={handleDelete} className="hover:bg-destructive hover:text-white  rounded-full transition-colors w-8 h-8 justify-self-center"><i className="bi-x-lg"></i></button>
         {(due_date == null && !edit) ? <></> :
