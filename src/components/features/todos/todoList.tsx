@@ -41,7 +41,7 @@ export function TodoList(){
         }).then(()=>{load()})
       }
     }
-    return <div className="sm:flex-grow-0 justify-center p-4 pt-2 gap-2 flex flex-col flex-grow z-0 w-full sm:w-[640px]">
+    return <div className="sm:flex-grow-0 justify-center p-4 pt-2 gap-2 flex flex-col flex-grow z-0 w-full sm:w-[640px] h-full">
         <TextInput inputRef={inputRef} onKeyDown={inputKeyDown} placeholder="New todo" className="outline-none flex text-foreground p-3 rounded-lg w-full sm:w-[608px]"></TextInput> 
         {
             loading ? <div className="flex justify-center"><LoadingSpinner width={32} height={32}></LoadingSpinner></div>:

@@ -6,9 +6,10 @@ import LoadingSpinner from "../loader";
 import { ChangeUsername } from "@/lib/actions/auth.actions";
 import { useNotify } from "@/hooks/useNotify";
 import { Button } from "@/components/ui/button";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 
 /** Provides the confirmation dialog for username change. */
-export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
+export function ChangeUsernameDialog(){
     // State to disable the change username button until API response arrives
     const [isWorking, setWorking] = useState(false);
     const [formValid, setFormValid] = useState(false);
@@ -18,7 +19,7 @@ export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
     const {notify} = useNotify();
     useEffect(()=>{
         setFormValid(false);
-    }, [props.visible]);
+    }, []);
     const validate = ()=>{
         if(currentPwRef.current==null) return;
         if(newUsernameRef.current==null) return;
@@ -42,18 +43,25 @@ export function ChangeUsernameDialog(props: Omit<ModalProps, "children">){
         } else notify(result ?? "Unknown error", {level: "error"});
         setWorking(false);
     }
-    return <ModalBase {...props}>
-        <div className="flex flex-col gap-4">
-            <h2>Change password</h2>
-            <span>Enter your password to confirm it&apos;s you.</span>
-            <TextInput inputRef={currentPwRef} onChange={validate} type="password" placeholder="Enter your password"></TextInput>
-            <TextInput inputRef={newUsernameRef} onChange={validate} type="text" placeholder="New username"></TextInput>
-            <div className="flex flex-grow justify-stretch gap-2">
-                <Button disabled={isWorking} className="w-full" onClick={()=>{props.setVisible(false)}} variant="secondary">Cancel</Button>
-                <Button onClick={submit} className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?
+    return <AlertDialog>
+        <AlertDialogTrigger asChild>
+            <Button className="mr-2">Change username</Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent className="flex flex-col gap-4 max-w-[400px] p-4 border border-border">
+            <AlertDialogHeader>
+                <AlertDialogTitle>Change password</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogDescription className="flex flex-col gap-2">
+                <span>Enter your password to confirm it&apos;s you.</span>
+                <TextInput inputRef={currentPwRef} onChange={validate} type="password" placeholder="Enter your password"></TextInput>
+                <TextInput inputRef={newUsernameRef} onChange={validate} type="text" placeholder="New username"></TextInput>
+            </AlertDialogDescription>
+            <AlertDialogFooter>
+                <AlertDialogCancel className="w-full">Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={submit} className="w-full flex justify-center items-center" disabled={isWorking || !formValid}>{isWorking ?
                 <LoadingSpinner width={24} height={24}></LoadingSpinner> :
-                "Change username"}</Button>
-            </div>
-        </div>
-    </ModalBase>
+                "Change username"}</AlertDialogAction>
+            </AlertDialogFooter>
+        </AlertDialogContent>
+    </AlertDialog>
 }

@@ -90,10 +90,10 @@ export function ChangePasswordDialog(){
                 {errorMessage ? <span className="text-base text-destructive">{errorMessage}</span> : <span className="text-base">&nbsp;</span>}
             </AlertDialogDescription>
             <AlertDialogFooter className="">
-                <AlertDialogCancel disabled={isWorking} className="flex-shrink-0">
+                <AlertDialogCancel disabled={isWorking} className="w-full">
                     Cancel
                 </AlertDialogCancel>
-                <AlertDialogAction onClick={submit} disabled={isWorking || !formValid} className="flex flex-shrink-0 justify-center items-center">
+                <AlertDialogAction onClick={submit} disabled={isWorking || !formValid} className="w-full">
                     {isWorking ? <LoadingSpinner width={24} height={24}></LoadingSpinner> : "Change password"}
                 </AlertDialogAction>
             </AlertDialogFooter>
