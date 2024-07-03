@@ -2,18 +2,20 @@
 import { Button } from "@/components/ui/button";
 import { logout } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
+import { ChevronLeft, LogOut } from "lucide-react";
 
 /** Top level controls on the settings page. */
 export function SettingsHeader() {
     const router = useRouter();
     return <div className="flex gap-2 items-center">
-        <Button onClick={()=>{router.push("/")}} variant="outline" className="h-10 flex flex-shrink-0 gap-2 text-xl items-center justify-center">
-            <i className="bi-chevron-left"></i>
-            <span>Back</span>
+        <Button onClick={()=>{router.push("/")}} variant="outline" size={"icon"} className="flex-shrink-0">
+            <ChevronLeft width={20} height={20}></ChevronLeft>
         </Button>
         <div className="w-full flex-grow-0"></div>
-        <Button onClick={()=>{logout()}} variant="destructive" className="h-10 w-10 flex-shrink-0 flex gap-2 text-xl items-center justify-center">
-            <i className="bi-box-arrow-right"></i>
+        <h2 className="flex-shrink-0">Settings</h2>
+        <div className="w-full flex-grow-0"></div>
+        <Button onClick={()=>{logout()}} variant="destructive" size={"icon"} className="flex-shrink-0">
+            <LogOut width={20} height={20}></LogOut>
         </Button>
     </div>
 }
