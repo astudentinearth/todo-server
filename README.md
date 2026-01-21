@@ -1,3 +1,7 @@
+> [!WARNING]
+> This repository is no longer maintained. There are dozens of vulnerable dependencies. In fact, some libraries used here are now unmaintained too.
+> If you are looking for a real app, [check this out instead.](https://github.com/astudentinearth/darkwrite)
+
 # Self hosted todo
 *My attempt at learning Next.js*  
 *This is **NOT** production ready software. Vulnerabilities may be present. Do not use this for storing critical information.*
